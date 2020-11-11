@@ -32,9 +32,9 @@ class App {
 
         this.polygon = new Polygon(
             this.stageWidth / 2,
-            this.staegHeight / 2,
-            this.staegHeight / 3,
-            10
+            this.staegHeight + (this.staegHeight / 4),
+            this.staegHeight / 1.5,
+            15
         );
     }
 
