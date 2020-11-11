@@ -1,3 +1,5 @@
+import { Polygon } from './polygon.js'
+
 class App {
     constructor() {
         this.canvas = document.createElement('canvas');
@@ -8,6 +10,10 @@ class App {
 
         window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
+
+        document.addEventListener('pointerdown', this.onDown.bind(this), false);
+        document.addEventListener('pointermove', this.onMove.bind(this), false);
+        document.addEventListener('pointerup', this.onUp.bind(this), false);
 
         window.requestAnimationFrame(this.animate.bind(this));
     }
@@ -20,12 +26,20 @@ class App {
         this.canvas.height = this.staegHeight * this.pixelRatio;
         this.ctx.scale(this.pixelRatio, this.pixelRatio);
 
+        this.polygon = new Polygon(
+            this.stageWidth / 2,
+            this.staegHeight / 2,
+            this.staegHeight / 3,
+            5
+        );
     }
 
     animate() {
         window.requestAnimationFrame(this.animate.bind(this));
 
         this.ctx.clearRect(0, 0, this.stageWidth, this.staegHeight);
+
+        this.polygon.animate(this.ctx);
     }
 }
 
