@@ -49,7 +49,7 @@ class App {
     }
 
     animate() {
-        window.requestAnimationFrame(this.animate.bidnd(this));
+        window.requestAnimationFrame(this.animate.bind(this));
 
         this.ctx.clearRect(0, 0, this.stageWidth, this.staegHeight);
 
@@ -61,11 +61,33 @@ class App {
     onDown(e) {
         this.mousePos.x = e.clientX;
         this.mousePos.y = e.clientY;
+
+        for (let i = this.items.length - 1; i >= 0; i--) {
+            const item = this.items[i].down(this.mousePos.clone());
+            if (item) {
+                this.curItem = item;
+                const index = this.items.indexOf(item);
+                this.items.push(this.items.splice(index, 1)[0]);
+                break;
+            }
+        }
     }
 
     onMove(e) {
         this.mousePos.x = e.clientX;
         this.mousePos.y = e.clientY;
+
+        for (let i = 0; i < this.items.length; i++) {
+            this.items[i].move(this.mousePos.clone());
+        }
+    }
+
+    onUp(e) {
+        this.curItem = null;
+
+        for (let i = 0; i < this.items.length; i++) {
+            this.items[i].up();
+        }
     }
 }
 
