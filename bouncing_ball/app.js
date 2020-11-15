@@ -1,3 +1,5 @@
+import { Ball } from './ball.js';
+
 class App {
     constructor() {
         this.canvas = document.createElement('canvas');
@@ -7,6 +9,8 @@ class App {
 
         window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
+
+        this.ball = new Ball(this.stageWidth, this.stageHeight, 60, 15);
 
         window.requestAnimationFrame(this.animate.bind(this));
     }
@@ -22,6 +26,8 @@ class App {
 
     animate(t) {
         window.requestAnimationFrame(this.animate.bind(this))
+
+        this.ball.draw(this.ctx, this.stageWidth, this.stageHeight);
     }
 }
 
