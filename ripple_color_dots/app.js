@@ -33,6 +33,17 @@ class App {
         this.canvas.height = this.stageHeight * this.pixelRatio;
         this.ctx.scale(this.pixelRatio, this.pixelRatio);
 
+        if (this.isLoaded) {
+            this.drawImage();
+        }
+    }
+
+    drawImage() {
+        const stageRatio = this.stageWidth / this.stageHeight;
+        const imgRatio = this.image.width / this.image.height;
+
+        this.imgPos.width = this.stageWidth;
+
     }
 }
 
