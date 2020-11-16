@@ -43,7 +43,31 @@ class App {
         const imgRatio = this.image.width / this.image.height;
 
         this.imgPos.width = this.stageWidth;
+        this.imgPos.height = this.stageHeight;
 
+        if (imgRatio > stageRatio) {
+            this.image.width = Math.round(
+                this.image.width * (this.stageHeight / this.image.height)
+            );
+            this.image.x = Math.round(
+                (this.stageWidth - this.imgPos.width) / 2
+            );
+        } else {
+            this.imgPos.height = Math.round(
+                this.image.height * (this.stageWidth / this.image.width)
+            );
+            this.imgPos.y = Math.round(
+                (this.stageHeight - this.imgPos.height) / 2
+            );
+        }
+
+        this.ctx.drawImage(
+            this.image.src,
+            0, 0,
+            this.image.width, this.image.height,
+            this.imgPos.x, this.imgPos.y,
+            this.imgPos.width, this.imgPos.height,
+        );
     }
 }
 
