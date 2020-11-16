@@ -24,5 +24,13 @@ export class Block {
         ctx.lineTo(this.x - xGap, this.maxY + yGap);
         ctx.lineTo(this.x, this.maxY);
         ctx.fill();
+
+        ctx.fillStyle = '#9d0919';
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x, this.maxY);
+        ctx.lineTo(this.x - xGap, this.maxY + yGap);
+        ctx.lineTo(this.x - xGap, this.maxY + yGap - this.height);
+        ctx.fill();
     }
 }
