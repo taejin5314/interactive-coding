@@ -8,6 +8,21 @@ class App {
 
         window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
+
+        this.isLoaded = false;
+        this.imgPos = {
+            x: 0,
+            y: 0,
+            width: 0,
+            height: 0,
+        };
+
+        this.image = new Image();
+        this.image.src = 'gogh1.jpg';
+        this.image.onload = () => {
+            this.isLoaded = true;
+            this.drawImage();
+        }
     }
 
     resize() {
