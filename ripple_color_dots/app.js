@@ -27,6 +27,10 @@ class App {
             this.isLoaded = true;
             this.drawImage();
         };
+
+        window.requestAnimationFrame(this.animate.bind(this));
+
+        this.canvas.addEventListener('click', this.onClick.bind(this), false);
     }
 
     resize() {
@@ -36,6 +40,8 @@ class App {
         this.canvas.width = this.stageWidth * this.pixelRatio;
         this.canvas.height = this.stageHeight * this.pixelRatio;
         this.ctx.scale(this.pixelRatio, this.pixelRatio);
+
+        this.ripple.resize(this.stageWidth, this.stageHeight);
 
         if (this.isLoaded) {
             this.drawImage();
