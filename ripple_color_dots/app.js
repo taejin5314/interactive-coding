@@ -9,9 +9,9 @@ class App {
         this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
 
         window.addEventListener('resize', this.resize.bind(this), false);
+        this.ripple = new Ripple();
         this.resize();
 
-        this.ripple = new Ripple();
 
         this.isLoaded = false;
         this.imgPos = {
@@ -78,6 +78,26 @@ class App {
             this.imgPos.x, this.imgPos.y,
             this.imgPos.width, this.imgPos.height,
         );
+    }
+
+    animate() {
+        window.requestAnimationFrame(this.animate.bind(this));
+
+        this.ripple.animate(this.ctx);
+    }
+
+    onClick(e) {
+        this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
+
+        this.ctx.drawImage(
+            this.image,
+            0, 0,
+            this.image.width, this.image.height,
+            this.imgPos.x, this.imgPos.y,
+            this.imgPos.width, this.imgPos.height,
+        );
+
+        this.ripple.start(e.offsetX, e.offsetY);
     }
 }
 
