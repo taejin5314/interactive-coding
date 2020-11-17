@@ -1,3 +1,5 @@
+import { Ripple } from './ripple.js';
+
 class App {
     constructor() {
         this.canvas = document.createElement('canvas');
@@ -8,6 +10,8 @@ class App {
 
         window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
+
+        this.ripple = new Ripple();
 
         this.isLoaded = false;
         this.imgPos = {

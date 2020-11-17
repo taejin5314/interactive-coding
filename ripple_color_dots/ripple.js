@@ -1,3 +1,5 @@
+import { distance } from './utils.js'
+
 export class Ripple {
     constructor() {
         this.x = 0;
@@ -19,11 +21,22 @@ export class Ripple {
         this.maxRadius = this.getMax(x, y);
     }
 
-    animate() {
+    animate(ctx) {
+        if (this.radius < this.maxRadius) {
+            this.radius += this.speed;
+        }
 
+        ctx.beginPath();
+        ctx.fillStyle = '#00ff00';
+        ctx.arc(this.x, this.y, this.radius, Math.PI * 2, false);
+        ctx.fill();
     }
 
     getMax(x, y) {
-
+        const c1 = distance(0, 0, x, y);
+        const c2 = distance(this.stageWidth, 0, x, y);
+        const c3 = distance(0, this.stageHeight, x, y);
+        const c4 = distance(this.stageWidth, this.stageHeight, x, y);
+        return Math.max(c1, c2, c3, c4);
     }
 }
