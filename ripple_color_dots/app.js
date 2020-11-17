@@ -18,8 +18,8 @@ class App {
         window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
 
-        this.radius = 5;
-        this.pixelSize = 10;
+        this.radius = 8;
+        this.pixelSize = 20;
         this.dots = [];
 
         this.isLoaded = false;
@@ -31,7 +31,7 @@ class App {
         };
 
         this.image = new Image();
-        this.image.src = 'gogh1.jpg';
+        this.image.src = 'gogh3.jpg';
         this.image.onload = () => {
             this.isLoaded = true;
             this.drawImage();
@@ -155,6 +155,10 @@ class App {
 
     onClick(e) {
         this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
+
+        for (let i = 0; i < this.dots.length; i++) {
+            this.dots[i].reset();
+        }
 
         this.ctx.drawImage(
             this.image,
