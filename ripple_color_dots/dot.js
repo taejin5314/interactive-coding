@@ -13,6 +13,21 @@ export class Dot {
     }
 
     animate(ctx) {
+        ctx.beginPath();
+        ctx.fillStyle = '#000';
+        ctx.fillRect(
+            this.x - this.pixelSizeHalf,
+            this.y - this.pixelSizeHalf,
+            this.pixelSize, this.pixelSize,
+        );
+
+        ctx.beginPath();
+        ctx.fillStyle = `rgb(${this.red}, ${this.green}, ${this.blue})`;
+        ctx.arc(this.x, this.y, this.radius, 0, PI2, false);
+        ctx.fill();
+    }
+
+    reset() {
 
     }
 }

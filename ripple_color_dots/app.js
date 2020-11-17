@@ -1,4 +1,5 @@
 import { Ripple } from './ripple.js';
+import { Dot } from './dot.js';
 
 class App {
     constructor() {
@@ -6,12 +7,19 @@ class App {
         document.body.appendChild(this.canvas);
         this.ctx = this.canvas.getContext('2d');
 
+        this.tmpCanvas = document.createElement('canvas');
+        this.tmpCtx = this.tmpCanvas.getContext('2d');
+
         this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
 
-        window.addEventListener('resize', this.resize.bind(this), false);
         this.ripple = new Ripple();
+
+        window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
 
+        this.radius = 10;
+        this.pixelSize = 30;
+        this.dots = [];
 
         this.isLoaded = false;
         this.imgPos = {
@@ -78,6 +86,12 @@ class App {
             this.imgPos.x, this.imgPos.y,
             this.imgPos.width, this.imgPos.height,
         );
+
+        this.drawDots();
+    }
+
+    drawDots() {
+        this.dots = [];
     }
 
     animate() {
