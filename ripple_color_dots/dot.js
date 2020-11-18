@@ -2,10 +2,12 @@ const PI2 = Math.PI * 2;
 const BOUNCE = 0.8;
 
 export class Dot {
-    constructor(x, y, radius, pixelSize, red, green, blue) {
+    constructor(x, y, radius, pixelSize, red, green, blue, scale) {
         this.x = x;
         this.y = y;
-        this.targetRadius = radius;
+        // const ratio = radius / 256 / 2;
+        // this.targetRadius = ratio * scale;
+        this.targetRadius = radius / 2;
         this.radius = 0;
         this.radiusV = 0;
         this.pixelSize = pixelSize;

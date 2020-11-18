@@ -18,7 +18,7 @@ class App {
         window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
 
-        this.radius = 8;
+        this.radius = 15;
         this.pixelSize = 20;
         this.dots = [];
 
@@ -122,15 +122,18 @@ class App {
                 const red = this.imgData.data[pixelIndex + 0];
                 const green = this.imgData.data[pixelIndex + 1];
                 const blue = this.imgData.data[pixelIndex + 2];
+                const scale = getBWValue(red, green, blue, true)
 
                 const dot = new Dot(
                     x, y,
                     this.radius,
                     this.pixelSize,
-                    red, green, blue
+                    red, green, blue,
+
                 );
 
                 this.dots.push(dot);
+
             }
 
         }
@@ -160,13 +163,13 @@ class App {
             this.dots[i].reset();
         }
 
-        this.ctx.drawImage(
-            this.image,
-            0, 0,
-            this.image.width, this.image.height,
-            this.imgPos.x, this.imgPos.y,
-            this.imgPos.width, this.imgPos.height,
-        );
+        // this.ctx.drawImage(
+        //     this.image,
+        //     0, 0,
+        //     this.image.width, this.image.height,
+        //     this.imgPos.x, this.imgPos.y,
+        //     this.imgPos.width, this.imgPos.height,
+        // );
 
         this.ripple.start(e.offsetX, e.offsetY);
     }
