@@ -12,6 +12,11 @@ export function collide(x1, y1, x2, y2, radius) {
     }
 }
 
-export function getBWValue() {
-
+export function getBWValue(red, green, blue, isReversed) {
+    const detect = 2;
+    if (!isReversed) {
+        return 255 - ((red + green + blue) / detect);
+    } else {
+        return Math.floor((red + green + blue) / detect);
+    }
 }

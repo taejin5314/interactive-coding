@@ -1,6 +1,6 @@
 import { Ripple } from './ripple.js';
 import { Dot } from './dot.js';
-import { collide } from './utils.js'
+import { collide, getBWValue } from './utils.js'
 
 class App {
     constructor() {
