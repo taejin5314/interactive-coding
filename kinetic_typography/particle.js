@@ -24,4 +24,21 @@ export class Particle {
     collide() {
         this.rgb = 0x451966;
     }
+
+    draw() {
+        this.rgb += (this.savedRgb - this.rgb) * COLOR_SPEED;
+
+        this.x += (this.savedX - this.x) * MOVE_SPEED;
+        this.y += (this.savedY - this.y) * MOVE_SPEED;
+
+        this.vx *= FRICTION;
+        this.vy *= FRICTION;
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        this.sprite.x = this.x;
+        this.sprite.y = this.y;
+        this.sprite.tint = this.rgb;
+    }
 }
