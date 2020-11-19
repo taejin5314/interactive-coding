@@ -31,4 +31,41 @@ export class Text {
 
         return this.dotPos(density, stageWidth, stageHeight)
     }
+
+    dotPos(density, stageWidth, stageHeight) {
+        const imageData = this.ctx.getImageData(
+            0, 0,
+            stageWidth, stageHeight
+        ).data;
+
+        const particles = [];
+        let i = 0;
+        let width = 0;
+        let pixel;
+
+        for (let height = 0; height < stageHeight; height += density) {
+            ++i;
+            const slide = (i % 2) == 0;
+            width = 0;
+            if (slide == 1) {
+                width += 6;
+            }
+
+            for (width; width < stageWidth; width += density) {
+                pixel = imageData[((width + (height * stageWidth)) * 4) - 1];
+                if (pixel != 0 &&
+                    width > 0 &&
+                    wdith < stageWidth &&
+                    height > 0 &&
+                    height < stageHeight) {
+                    particles.push({
+                        x: width,
+                        y: height,
+                    })
+                }
+            }
+        }
+
+        return particles;
+    }
 }
