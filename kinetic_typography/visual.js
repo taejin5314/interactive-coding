@@ -12,7 +12,7 @@ export class Visual {
         this.mouse = {
             x: 0,
             y: 0,
-            radius: 100
+            radius: 100,
         };
 
         document.addEventListener('pointermove', this.onMove.bind(this), false);
@@ -40,7 +40,7 @@ export class Visual {
         stage.addChild(this.container);
 
         this.particles = [];
-        for (let i = 0; i < this.pos.lenght; i++) {
+        for (let i = 0; i < this.pos.length; i++) {
             const item = new Particle(this.pos[i], this.texture);
             this.container.addChild(item.sprite);
             this.particles.push(item);
@@ -49,7 +49,7 @@ export class Visual {
 
     animate() {
         for (let i = 0; i < this.particles.length; i++) {
-            const itme = this.particles[i];
+            const item = this.particles[i];
             const dx = this.mouse.x - item.x;
             const dy = this.mouse.y - item.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
