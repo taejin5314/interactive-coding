@@ -51,8 +51,16 @@ export class Text {
                 width += 6;
             }
             for (width; width < stageWidth; width += density) {
-
+                pixel = imageData[((width + (height * stageWidth)) * 4) - 1];
+                if (pixel != 0 && width > 0 && width < stageWidth && height > 0 && height < stageHeight) {
+                    particles.push({
+                        x: width,
+                        y: height,
+                    });
+                }
             }
         }
+
+        return particles;
     }
 }
