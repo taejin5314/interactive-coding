@@ -10,9 +10,9 @@ export class Particle {
             y: pos.y,
         }];
 
-        for (let i = 0; i < TOTAL; i++) {
+        for (let i = 1; i < TOTAL; i++) {
             const prev = this.points[i - 1];
-            this.points.push(this.setTandom(prev, ranMax));
+            this.points.push(this.setRandom(prev, ranMax));
         }
 
         this.draw(ctx);
@@ -35,7 +35,7 @@ export class Particle {
         ctx.stroke();
     }
 
-    setTandom(pos, gap) {
+    setRandom(pos, gap) {
         return {
             x: pos.x + Math.random() * (gap + gap) - gap,
             y: pos.y + Math.random() * (gap + gap) - gap,

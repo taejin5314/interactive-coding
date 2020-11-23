@@ -16,7 +16,7 @@ export async function setColor(url) {
 
             resolve({
                 colorCtx: tmpCtx,
-                widht: image.width,
+                width: image.width,
                 height: image.height
             })
         }
