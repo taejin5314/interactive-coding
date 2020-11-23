@@ -42,6 +42,17 @@ class App {
         });
     }
 
+    async show(index) {
+        for (let i = 0; i < this.thumbs.length; i++) {
+            const item = this.thumbs[i].item;
+            if (i == index) {
+                item.classList.add('selected');
+            } else {
+                item.classList.remove('selected');
+            }
+        }
+    }
+
     resize() {
         this.stageWidth = document.body.clientWidth;
         this.stageHeight = document.body.clientHeight;
