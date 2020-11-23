@@ -51,6 +51,12 @@ class App {
                 item.classList.remove('selected');
             }
         }
+
+        const img = this.thumbs[index].img;
+
+        await setColor(img).then(obj => {
+            this.visual = new Visual(this.pos, obj.colorCtx, obj.width, obj.height)
+        });
     }
 
     resize() {
