@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let particleArray = [];
-const numberOfParticles = 300;
+const numberOfParticles = 250;
 
 const mouse = {
     x: null,
@@ -72,7 +72,7 @@ function animate() {
     // ctx.fillRect(0, 0, canvas.width, canvas.height)
     for (let i = 0; i < particleArray.length; i++) {
         particleArray[i].update();
-        particleArray[i].draw();
+        // particleArray[i].draw();
     }
     connect();
     requestAnimationFrame(animate);
@@ -88,9 +88,9 @@ function connect() {
         for (let b = a; b < particleArray.length; b++) {
             let distance = ((particleArray[a].x - particleArray[b].x) * (particleArray[a].x - particleArray[b].x) + (particleArray[a].y - particleArray[b].y) * (particleArray[a].y - particleArray[b].y));
 
-            if (distance < 200) {
+            if (distance < 1800) {
                 opacityValue = 1 - (distance / 10000);
-                ctx.strkeStyle = 'rgba(0, 0, 0, ' + opacityValue + ')';
+                ctx.strokeStyle = 'rgba(255, 255, 255, ' + opacityValue + ')';
 
                 ctx.beginPath();
                 ctx.lineWidth = 1;
