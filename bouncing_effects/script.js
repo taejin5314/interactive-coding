@@ -17,5 +17,25 @@ window.addEventListener('mouseover', function (event) {
 setInterval(function () {
     mouse.x = undefined;
     mouse.y = undefined;
-})
+}, 200);
 
+class Particle {
+    constructor(x, y, size, color, weight) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.color = color;
+        this.weight = weight;
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+    }
+    update() {
+        this.size -= 0.05;
+
+    }
+}
