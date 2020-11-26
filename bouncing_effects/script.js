@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let particleArray = [];
-const numberOfParticles = 200;
+const numberOfParticles = 300;
 
 const mouse = {
     x: null,
@@ -40,14 +40,14 @@ class Particle {
         if (this.size < 0) {
             this.x = (mouse.x + ((Math.random() * 20) - 10));
             this.y = (mouse.y + ((Math.random() * 20) - 10));
-            this.size = (Math.random() * 10) + 2;
+            this.size = (Math.random() * 10) + 15;
             this.weight = (Math.random() * 2) - 0.5;
         }
         this.y += this.weight;
         this.weight += 0.2;
 
         if (this.y > canvas.height - this.size) {
-            this.weight *= -1;
+            this.weight *= -0.2;
         };
 
 
@@ -59,7 +59,7 @@ function init() {
     for (let i = 0; i < numberOfParticles; i++) {
         let x = Math.random() * canvas.width;
         let y = Math.random() * canvas.height;
-        let size = Math.random() * 5 + 2;
+        let size = Math.random() * 10 + 5;
         let color = 'pink';
         let weight = 1;
         particleArray.push(new Particle(x, y, size, color, weight));
