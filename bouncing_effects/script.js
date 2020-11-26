@@ -3,6 +3,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 const particleArray = [];
+const numberOfParticles = 100;
 
 const mouse = {
     x: null,
@@ -52,3 +53,27 @@ class Particle {
 
     }
 }
+
+function init() {
+    particleArray = [];
+    for (let i = 0; i < numberOfParticles; i++) {
+        let x = Math.random() * canvas.width;
+        let y = Math.random() * canvas.height;
+        let size = Math.random() * 5 + 2;
+        let color = 'black';
+        let weight = 1;
+        particleArray.push(new Particle(x, y, size, color, weight));
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particleArray.length; i++) {
+        particleArray[i].update();
+        particleArray[i].draw();
+    }
+    requestAnimationFrame(animate);
+}
+
+init();
+animate();
