@@ -74,6 +74,7 @@ function animate() {
         particleArray[i].update();
         particleArray[i].draw();
     }
+    connect();
     requestAnimationFrame(animate);
 }
 
@@ -89,12 +90,13 @@ function connect() {
 
             if (distance < 200) {
                 opacityValue = 1 - (distance / 10000);
-                ctx.fillStyle('rgba(0, 0, 0, ' + opacityValue + ')');
+                ctx.strkeStyle = 'rgba(0, 0, 0, ' + opacityValue + ')';
 
                 ctx.beginPath();
                 ctx.lineWidth = 1;
                 ctx.moveTo(particleArray[a].x, particleArray[a].y);
                 ctx.lineTo(particleArray[b].x, particleArray[b].y);
+                ctx.stroke();
             }
         }
     }
