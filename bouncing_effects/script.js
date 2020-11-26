@@ -2,7 +2,7 @@ const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-const particleArray = [];
+let particleArray = [];
 const numberOfParticles = 100;
 
 const mouse = {
@@ -10,7 +10,7 @@ const mouse = {
     y: null
 }
 
-window.addEventListener('mouseover', function (event) {
+window.addEventListener('mousemove', function (event) {
     mouse.x = event.x;
     mouse.y = event.y;
 })
