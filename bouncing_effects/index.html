@@ -7,7 +7,29 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <canvas id="canvas1"></canvas>
+    <canvas id="canvas1">
+      <svg>
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur
+              in="SourceGraphic"
+              stdDeviation="10"
+              result="blur"
+            />
+            <feColorMatrix
+              in="blur"
+              mode="matrix"
+              values="1 0 0 0 0
+                        0 1 0 0 0
+                        0 0 1 0 0
+                        0 0 0 19 -9"
+              result="goo"
+            />
+            <feComposite in="SourceGraphic" in2="goo" oparator="atop" />
+          </filter>
+        </defs>
+      </svg>
+    </canvas>
     <script type="module" src="script.js"></script>
   </body>
 </html>
