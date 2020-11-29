@@ -44,9 +44,9 @@ class Particle {
 
 function init() {
     particleArray = [];
-    for (let i = 0; i < 10; i++) {
-        let x = Math.random() * 500;
-        let y = Math.random() * 500;
+    for (let i = 0; i < 500; i++) {
+        let x = Math.random() * canvas.width;
+        let y = Math.random() * canvas.height;
         particleArray.push(new Particle(x, y));
     }
     // particleArray.push(new Particle(50, 50));
