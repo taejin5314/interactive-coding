@@ -14,6 +14,7 @@ const mouse = {
 window.addEventListener('mousemove', function (event) {
     mouse.x = event.x;
     mouse.y = event.y;
+    mouse.radius = 150;
     // console.log(mouse.x, mouse.y);
 })
 
@@ -45,8 +46,12 @@ class Particle {
         let dx = mouse.x - this.x;
         let dy = mouse.y - this.y;
         let distance = Math.sqrt(dx * dx + dy * dy);
+        let forceDirectionX = dx / distance;
+        let forceDirectionY = dy / distance;
+        let maxDistance = mouse.radius
         if (distance < 300) {
-            this.size = 20;
+            this.x += forceDirectionX * 2;
+            this.y += forceDirectionY * 2;
         } else {
             this.size = 3;
         }
