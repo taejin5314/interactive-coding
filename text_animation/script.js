@@ -19,4 +19,18 @@ window.addEventListener('mousemove', function (event) {
 
 ctx.fillStyle = 'white';
 ctx.font = '30px Verdana';
-ctx.fillText('A', 0, 40);
+ctx.fillText('A', 0, 30);
+// ctx.strokeStyle = 'white';
+// ctx.strokeRect(0, 0, 100, 100);
+const data = ctx.getImageData(0, 0, 100, 100);
+
+class Particle {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = 3;
+        this.baseX = this.x;
+        this.baseY = this.y;
+
+    }
+}
