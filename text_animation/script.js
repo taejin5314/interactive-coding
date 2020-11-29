@@ -14,7 +14,7 @@ const mouse = {
 window.addEventListener('mousemove', function (event) {
     mouse.x = event.x;
     mouse.y = event.y;
-    console.log(mouse.x, mouse.y);
+    // console.log(mouse.x, mouse.y);
 })
 
 ctx.fillStyle = 'white';
@@ -31,6 +31,37 @@ class Particle {
         this.size = 3;
         this.baseX = this.x;
         this.baseY = this.y;
-
+        this.density = (Math.random() * 30) + 1;
+    }
+    draw() {
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
     }
 }
+
+function init() {
+    particleArray = [];
+    for (let i = 0; i < 10; i++) {
+        let x = Math.random() * 500;
+        let y = Math.random() * 500;
+        particleArray.push(new Particle(x, y));
+    }
+    // particleArray.push(new Particle(50, 50));
+    // particleArray.push(new Particle(180, 180))
+}
+
+init();
+console.log(particleArray);
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particleArray.length; i++) {
+        particleArray[i].draw();
+    }
+    requestAnimationFrame(animate);
+}
+
+animate();
