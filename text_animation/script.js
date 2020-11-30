@@ -3,6 +3,8 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let particleArray = [];
+let adjustX = 20;
+let adjustY = 10;
 
 // handle mousse
 const mouse = {
@@ -20,7 +22,7 @@ window.addEventListener('mousemove', function (event) {
 
 ctx.fillStyle = 'white';
 ctx.font = '30px Verdana';
-ctx.fillText('A', 0, 30);
+ctx.fillText('Hello', 0, 30);
 // ctx.strokeStyle = 'white';
 // ctx.strokeRect(0, 0, 100, 100);
 const textCoordinates = ctx.getImageData(0, 0, 100, 100);
@@ -35,7 +37,7 @@ class Particle {
         this.density = (Math.random() * 30) + 1;
     }
     draw() {
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = 'white';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.closePath();
@@ -68,13 +70,15 @@ class Particle {
         }
     }
 }
-console.log(textCoordinates.data);
+
 function init() {
     particleArray = [];
     for (let y = 0, y2 = textCoordinates.height; y < y2; y++) {
         for (let x = 0, x2 = textCoordinates.width; x < x2; x++) {
-            if (textCoordinates.data[1] > 128) {
-
+            if (textCoordinates.data[(y * 4 * textCoordinates.width) + (x * 4 + 3)] > 128) {
+                let positionX = x + adjustX;
+                let positionY = y + adjustY;
+                particleArray.push(new Particle(positionX * 10, positionY * 10))
             }
         }
     }
