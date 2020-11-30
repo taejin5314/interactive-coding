@@ -57,7 +57,14 @@ class Particle {
             this.x -= directionX;
             this.y -= directionY;
         } else {
-            this.size = 3;
+            if (this.x !== this.baseX) {
+                let dx = this.x - this.baseX;
+                this.x -= dx / 10;
+            }
+            if (this.y !== this.baseY) {
+                let dy = this.y - this.baseY;
+                this.y -= dy / 10;
+            }
         }
     }
 }
