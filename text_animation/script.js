@@ -21,8 +21,8 @@ window.addEventListener('mousemove', function (event) {
 })
 
 ctx.fillStyle = 'white';
-ctx.font = '30px Verdana';
-ctx.fillText('Hello', 0, 30);
+ctx.font = '15px Verdana';
+ctx.fillText('INTERACTIVE', 0, 30);
 // ctx.strokeStyle = 'white';
 // ctx.strokeRect(0, 0, 100, 100);
 const textCoordinates = ctx.getImageData(0, 0, 100, 100);
@@ -100,14 +100,16 @@ function animate() {
 animate();
 
 function connect() {
+    let opacityValue = 1;
     for (let a = 0; a < particleArray.length; a++) {
         for (let b = a; b < particleArray.length; b++) {
             let dx = particleArray[a].x - particleArray[b].x;
             let dy = particleArray[a].y - particleArray[b].y;
             let distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (distance < 20) {
-                ctx.strokeStyle = 'white';
+            if (distance < 30) {
+                opacityValue = 1 - (distance / 30);
+                ctx.strokeStyle = 'rgba(255, 255, 255,' + opacityValue + ')';
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(particleArray[a].x, particleArray[a].y);
