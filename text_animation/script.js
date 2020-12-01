@@ -93,6 +93,7 @@ function animate() {
         particleArray[i].draw();
         particleArray[i].update();
     }
+    connect();
     requestAnimationFrame(animate);
 }
 
@@ -105,12 +106,13 @@ function connect() {
             let dy = particleArray[a].y - particleArray[b].y;
             let distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (distance < 100) {
+            if (distance < 20) {
                 ctx.strokeStyle = 'white';
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(particleArray[a].x, particleArray[a].y);
-                ctx.lineTo(particleArray[b].x, particleArrayp[b].y);
+                ctx.lineTo(particleArray[b].x, particleArray[b].y);
+                ctx.stroke();
             }
         }
     }
