@@ -18,8 +18,10 @@ class Particle {
     draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'hsl(' + hue + ', 100%, 50%)';
+        ctx.fillStyle = gradient;
         ctx.fill();
+        ctx.strokeStyle = 'black';
+        ctx.stroke();
     }
 
     update() {
@@ -43,7 +45,7 @@ function init() {
 
 function animate() {
     // ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.01)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < numberOfParticles; i++) {
         particleArray[i].update();
@@ -52,5 +54,12 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
+const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+gradient.addColorStop('0.2', 'red');
+gradient.addColorStop('0.4', 'blue');
+gradient.addColorStop('0.6', 'yellow');
+gradient.addColorStop('0.8', 'green');
+
 init();
 animate();
+
