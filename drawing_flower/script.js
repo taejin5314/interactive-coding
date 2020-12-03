@@ -3,13 +3,16 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let positionX = canvas.width / 2;
-let positionY = canvas.height / 2;
-let angle = 0;
+let number = 0;
+let scale = 10;
 
 function drawFlower() {
     // clearing the canvas each time the function is called
     // ctx.clearRect(0, 0, canvas.width, canvas.height)
+    let angle = number * 1;
+    let radius = scale * Math.sqrt(number);
+    let positionX = radius * Math.sin(angle);
+    let positionY = radius * Math.cos(angle);
 
     ctx.fillStyle = 'blue';
     ctx.strokeStyle = 'black';
@@ -19,13 +22,11 @@ function drawFlower() {
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
+
+    number++;
 }
 
 function animate() {
-    positionX += 5 * Math.sin(angle);
-    positionY += 5 * Math.cos(angle);
-    angle += 0.1;
-
     drawFlower();
 
     requestAnimationFrame(animate);
