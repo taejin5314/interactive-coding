@@ -48,6 +48,7 @@ function animate() {
     for (let i = 0; i < numberOfParticles; i++) {
         particleArray[i].update();
     }
+    hue += 1;
     requestAnimationFrame(animate);
 }
 
