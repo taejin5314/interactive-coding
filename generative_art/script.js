@@ -13,7 +13,7 @@ const mouse = {
 window.addEventListener('mousemove', function (event) {
     mouse.x = event.x;
     mouse.y = event.y;
-    console.log(mouse)
+    // console.log(mouse)
 })
 
 class Root {
@@ -35,6 +35,36 @@ class Root {
 
         const distanceX = this.x - this.centerX;
         const distanceY = this.y - this.centerY;
+        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+        const radius = (-distance / edge + 1) * edge / 10;
 
+        if (radius > 0) {
+            requestAnimationFrame(this.draw.bind(this));
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.strokeStyle = 'gold';
+            ctx.stroke();
+        }
     }
 }
+
+function branchOut() {
+    const centerX = mouse.x;
+    const centerY = mouse.y;
+    for (let i = 0; i < 3; i++) {
+        const root = new Root(mouse.x, mouse.y, 'pink', centerX, centerY)
+        root.draw();
+    }
+}
+
+window.addEventListener('resize', function () {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+window.addEventListener('mousemove', function () {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    branchOut();
+})
