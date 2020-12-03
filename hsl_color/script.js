@@ -5,3 +5,9 @@ canvas.height = window.innerHeight;
 let numberOfParticles = 200;
 const particleArray = [];
 let hue = 0;
+
+class Particle {
+    constructor() {
+
+    }
+}
