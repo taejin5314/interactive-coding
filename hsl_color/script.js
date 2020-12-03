@@ -20,7 +20,7 @@ class Particle {
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = gradient;
         ctx.fill();
-        ctx.strokeStyle = 'black';
+        ctx.strokeStyle = gradient2;
         ctx.stroke();
     }
 
@@ -59,6 +59,11 @@ gradient.addColorStop('0.2', 'red');
 gradient.addColorStop('0.4', 'blue');
 gradient.addColorStop('0.6', 'yellow');
 gradient.addColorStop('0.8', 'green');
+
+const gradient2 = ctx.createLinearGradient(0, 0, canvas.width, 0);
+gradient2.addColorStop('0.2', 'black');
+gradient2.addColorStop('0.5', 'transparent');
+gradient2.addColorStop('0.8', 'white');
 
 init();
 animate();
