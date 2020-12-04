@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const edge = 80;
+const edge = 60;
 
 const mouse = {
     x: null,
@@ -44,7 +44,7 @@ class Root {
             ctx.arc(this.x, this.y, radius, 0, 2 * Math.PI);
             ctx.fillStyle = this.color;
             ctx.fill();
-            ctx.strokeStyle = 'gold';
+            ctx.strokeStyle = 'black';
             ctx.stroke();
         }
     }
@@ -65,7 +65,7 @@ window.addEventListener('resize', function () {
 });
 
 window.addEventListener('mousemove', function () {
-    ctx.fillStyle = 'rgba(0, 0, 255, 0.03)';
+    ctx.fillStyle = 'rgba(200, 200, 255, 0.03)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     branchOut();
 })
