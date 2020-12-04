@@ -65,6 +65,7 @@ window.addEventListener('resize', function () {
 });
 
 window.addEventListener('mousemove', function () {
+    ctx.fillStyle = 'rgba(0, 0, 255, 0.03)';
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     branchOut();
 })
