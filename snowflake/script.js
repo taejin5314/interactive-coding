@@ -5,10 +5,12 @@ canvas.height = window.innerHeight;
 
 const maxLevel = 5;
 const branches = 2;
+const sides = Math.floor((Math.random() * 10) + 3);
+const spread = Math.random() * 0.48 + 0.51
 
 ctx.translate(canvas.width / 2, canvas.height / 2);
 
-const angle = Math.PI * 2 * 0.85;
+const angle = Math.PI * 2 * spread;
 
 function drawLine(level) {
     if (level > maxLevel) return;
@@ -22,7 +24,7 @@ function drawLine(level) {
 
     for (let i = 1; i < branches + 1; i++) {
         ctx.save();
-        ctx.translate(200 * 1 / (branches + 1), 0);
+        ctx.translate(200 * i / (branches + 1), 0);
         ctx.scale(0.5, 0.5);
         ctx.save();
 
@@ -39,7 +41,7 @@ function drawLine(level) {
     }
 }
 
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < sides; i++) {
     drawLine(0);
-    ctx.rotate(Math.PI * 2 / 5)
+    ctx.rotate(Math.PI * 2 / sides)
 }
