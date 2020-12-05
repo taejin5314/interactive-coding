@@ -43,14 +43,31 @@ class Eye {
 
 function init() {
     eyes = [];
-    let numberOfEyes = 20;
-    for (let i = 0; i < numberOfEyes; i++) {
+    let overlapping = false;
+    let numberOfEyes = 200;
+    let protection = 10000;
+    let counter = 0;
+
+    while (eyes.length < numberOfEyes && counter < protection) {
         let eye = {
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
             radius: Math.floor(Math.random() * 100) + 5,
+        };
+        overlapping = false;
+        for (let i = 0; i < eyes.length; i++) {
+            let previousEye = eyes[i];
+            let dx = eye.x - previousEye.x;
+            let dy = eye.y - previousEye.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < (eye.radius + previousEye.radius)) {
+                overlapping = true;
+                break;
+            }
         }
-        eyes.push(new Eye(eye.x, eye.y, eye.radius));
+        if (!overlapping) {
+            eyes.push(new Eye(eye.x, eye.y, eye.radius));
+        }
     }
 }
 
