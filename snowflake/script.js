@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const maxLevel = 5;
+const maxLevel = 6;
 const branches = 2;
 const sides = Math.floor((Math.random() * 10) + 3);
 const spread = Math.random() * 0.48 + 0.51
