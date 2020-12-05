@@ -2,8 +2,10 @@ const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+// ctx.globalCompositeOperation = 'destination-over'
 
 const edge = 60;
+let drawing = false;
 
 const mouse = {
     x: null,
@@ -51,11 +53,13 @@ class Root {
 }
 
 function branchOut() {
-    const centerX = mouse.x;
-    const centerY = mouse.y;
-    for (let i = 0; i < 3; i++) {
-        const root = new Root(mouse.x, mouse.y, 'pink', centerX, centerY)
-        root.draw();
+    if (drawing) {
+        const centerX = mouse.x;
+        const centerY = mouse.y;
+        for (let i = 0; i < 3; i++) {
+            const root = new Root(mouse.x, mouse.y, 'pink', centerX, centerY)
+            root.draw();
+        }
     }
 }
 
@@ -65,7 +69,15 @@ window.addEventListener('resize', function () {
 });
 
 window.addEventListener('mousemove', function () {
-    ctx.fillStyle = 'rgba(200, 200, 255, 0.03)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // ctx.fillStyle = 'rgba(200, 200, 255, 0.03)';
+    // ctx.fillRect(0, 0, canvas.width, canvas.height);
     branchOut();
+})
+
+window.addEventListener('mousedown', function () {
+    drawing = true;
+})
+
+window.addEventListener('mouseup', function () {
+    drawing = false;
 })
