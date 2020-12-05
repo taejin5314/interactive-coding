@@ -29,7 +29,20 @@ class Eye {
         ctx.fillStyle = 'red';
         ctx.fill();
         ctx.closePath();
+
         // draw iris
+        let iris_dx = mouse.x - this.x;
+        let iris_dy = mouse.y - this.y;
+        theta = Math.atan2(iris_dy, iris_dx);
+        let iris_x = this.x + Math.cos(theta) * this.radius / 10;
+        let iris_y = this.y + Math.sin(theta) * this.radius / 10;
+        let irisRadius = this.radius / 1.11;
+        ctx.beginPath();
+        ctx.arc(iris_x, iris_y, irisRadius, 0, Math.PI * 2, true);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+        ctx.closePath();
+
         // draw pupil
         // draw pupil reflection
         // draw mouse
