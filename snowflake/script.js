@@ -13,7 +13,7 @@ const angle = Math.PI * 2 * 0.85;
 function drawLine(level) {
     if (level > maxLevel) return;
 
-    ctx.strokeStlye = '#fff';
+    ctx.strokeStyle = '#fff';
     ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.moveTo(0, 0);
@@ -21,9 +21,25 @@ function drawLine(level) {
     ctx.stroke();
 
     for (let i = 1; i < branches + 1; i++) {
-        ctx.svae();
+        ctx.save();
         ctx.translate(200 * 1 / (branches + 1), 0);
         ctx.scale(0.5, 0.5);
         ctx.save();
+
+        ctx.rotate(angle);
+        drawLine(level + 1);
+        ctx.restore();
+        ctx.save();
+
+        ctx.rotate(-angle);
+        drawLine(level + 1);
+        ctx.restore();
+
+        ctx.restore();
     }
+}
+
+for (let i = 0; i < 5; i++) {
+    drawLine(0);
+    ctx.rotate(Math.PI * 2 / 5)
 }
