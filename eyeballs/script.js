@@ -25,7 +25,7 @@ class Eye {
     draw() {
         // draw eye
         ctx.beginPath();
-        ctx.arc(this.x, this.xy, this.radius, 0, Math.PI * 2, true);
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
         ctx.fillStyle = 'red';
         ctx.fill();
         ctx.closePath();
