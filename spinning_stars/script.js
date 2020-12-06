@@ -26,9 +26,9 @@ class Particle {
     draw() {
         let x = Math.cos(this.position) * this.moveRadius + mouse.x;
         let y = Math.sin(this.position) * this.moveRadius + mouse.y;
-        drawStar(x, y, 5, this.size, this.size / 2);
+        drawStar(x, y, 5, this.moveRadius / 15, this.moveRadius / 30);
         ctx.closePath();
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = 'gold';
         ctx.fill();
         // ctx.strokeStyle = 'white';
         // ctx.stroke();
