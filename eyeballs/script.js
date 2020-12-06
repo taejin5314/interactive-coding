@@ -44,6 +44,18 @@ class Eye {
         ctx.closePath();
 
         // draw pupil
+        let pupil_dx = mouse.x - this.x;
+        let pupil_dy = mouse.y - this.y;
+        theta = Math.atan2(pupil_dy, pupil_dx);
+        let pupilRadius = this.radius / 2.5;
+        let pupil_x = this.x + Math.cos(theta) * this.radius / 1.9;
+        let pupil_y = this.y + Math.sin(theta) * this.radius / 1.9;
+        ctx.beginPath();
+        ctx.arc(pupil_x, pupil_y, pupilRadius, 0, Math.PI * 2, true);
+        ctx.fillStyle = 'black';
+        ctx.fill();
+        ctx.closePath();
+
         // draw pupil reflection
         // draw mouse
         ctx.beginPath();
