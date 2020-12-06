@@ -7,7 +7,7 @@ let particleArray = [];
 let mouse = {
     x: undefined,
     y: undefined,
-    radius = 100,
+    radius: 100,
 }
 
 window.addEventListener('mousemove', function (e) {
@@ -26,7 +26,7 @@ function drawImage() {
             this.x = x + canvas.width / 2 - png.width * 2;
             this.y = y + canvas.height / 2 - png.height * 2;
             this.color = color;
-            this.size = size * 2;
+            this.size = 2;
             this.baseX = x + canvas.width / 2 - png.width * 2;
             this.baseY = y + canvas.height / 2 - png.height * 2;
             this.density = Math.random() * 10 + 2;
@@ -48,7 +48,7 @@ function drawImage() {
             let forceDirectionY = dy / distance;
 
             const maxDistance = 100;
-            let force = (maxDistance - distance) / maxDistance;
+            let force = (maxDistance - distance) / maxDistance * 3;
             if (force < 0) force = 0;
 
             let directionX = (forceDirectionX * force * this.density * 0.6);
@@ -69,5 +69,45 @@ function drawImage() {
             this.draw();
         }
     }
+    function init() {
+        particleArray = [];
+
+        for (let y = 0, y2 = data.height; y < y2; y++) {
+            for (let x = 0, x2 = data.width; x < x2; x++) {
+                if (data.data[(y * 4 * data.width) + (x * 4) + 3] > 128) {
+                    let positionX = x;
+                    let positionY = y;
+                    let color = "rgb(" + data.data[(y * 4 * data.width) + (x * 4)] + ',' + data.data[(y * 4 * data.width) + (x * 4) + 1] + ',' + data.data[(y * 4 * data.width) + (x * 4) + 2] + ')';
+                    particleArray.push(new Particle(positionX * 4, positionY * 4, color))
+                }
+            }
+        }
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, innerWidth, innerHeight);
+
+        for (let i = 0; i < particleArray.length; i++) {
+            particleArray[i].update();
+        }
+    }
+    init();
+    animate();
+
+    window.addEventListener('resize', function () {
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
+        init();
+    });
 }
 
+const png = new Image();
+png.src = 'mushroom.png'
+
+window.addEventListener('load', (event) => {
+    console.log('page has loaded');
+    ctx.drawImage(png, 0, 0);
+    drawImage();
+})
