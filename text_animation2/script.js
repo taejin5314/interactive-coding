@@ -47,6 +47,15 @@ class Particle {
         ctx.fillText(this.text, this.x - this.radius / 2.9, this.y);
         ctx.closePath();
     }
+    update() {
+        if (mouse.x === undefined && mouse.y === undefined) {
+            let newX = mouse.radius * canvas.width / 150 * Math.sin(mouse.autopilotAngle * (Math.PI / 180));
+            let newY = mouse.radius * canvas.height / 150 * Math.cos(mouse.autopilotAngle * (Math.PI / 360));
+            mouse.x = newX + canvas.width / 2;
+            mouse.y = newY + canvas.height / 2;
+        }
+        mouse.autopilotAngle += 0.05;
+    }
 }
 
 function handleOverlap() {
@@ -84,6 +93,7 @@ function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < particles.length; i++) {
         particles[i].draw();
+        particles[i].update();
     }
     if (particles.length >= numberOfParticles) {
         for (let i = 0; i < 5; i++) {
@@ -96,3 +106,8 @@ function animate() {
 }
 
 animate();
+
+let autopilot = setInterval(function () {
+    mouse.x = undefined;
+    mouse.y = undefined;
+}, 40)
