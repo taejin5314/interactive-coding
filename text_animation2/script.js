@@ -12,7 +12,7 @@ let numberOfParticles = 20;
 const mouse = {
     x: 0,
     y: 0,
-    radius: 0,
+    radius: 50,
     autopilotAngle: 0,
 }
 
