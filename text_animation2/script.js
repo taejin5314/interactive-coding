@@ -40,10 +40,33 @@ class Particle {
 
 function handleOverlap() {
     let overlapping = false;
-    for (let i = 0; i < numberOfParticles; i++) {
-        particles.unshift(new Particle(mouse.x, mouse.y, 20))
-    }
+    let protection = 500;
+    let counter = 0;
 
+    while (particles.length < numberOfParticles && counter < protection) {
+        let randomAngle = Math.random() * Math.PI * 2;
+        let randomRadius = mouse.radius * Math.sqrt(Math.random());
+        let particle = {
+            x: mouse.x + randomRadius * Math.cos(randomAngle),
+            y: mouse.y + randomRadius * Math.sin(randomAngle),
+            radius: Math.floor(Math.random() * 30) + 10,
+        }
+        overlapping = false;
+        for (let i = 0; i < particles.length; i++) {
+            let previouseParticle = particles[i];
+            let dx = particle.x - previouseParticle.x;
+            let dy = particle.y - previouseParticle.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < particle.radius + previouseParticle.radius) {
+                overlapping = true;
+                break;
+            }
+        }
+        if (!overlapping) {
+            particles.unshift(new Particle(particle.x, particle.y, particle.radius))
+        }
+        counter++;
+    }
 }
 
 function animate() {
@@ -52,7 +75,7 @@ function animate() {
         particles[i].draw();
     }
     if (particles.length >= numberOfParticles) {
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 18; i++) {
             particles.pop();
         }
     }
