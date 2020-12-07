@@ -111,3 +111,15 @@ let autopilot = setInterval(function () {
     mouse.x = undefined;
     mouse.y = undefined;
 }, 40)
+
+canvas.addEventListener('mouseleave', function () {
+    autopilot = setInterval(function () {
+        mouse.x = undefined;
+        mouse.y = undefined;
+    }, 40)
+})
+
+canvas.addEventListener('mouseenter', function () {
+    clearInterval(autopilot);
+    autopilot = undefined;
+})
