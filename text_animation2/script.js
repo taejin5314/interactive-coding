@@ -6,8 +6,8 @@ ctx.textBaseline = 'middle';
 let lettersArray = ['T', 'A', 'E', 'J', 'I', 'N'];
 let hue = 0;
 let particles = [];
-// let numberOfParticles = (canvas.width * canvas.height) / 5000;
-let numberOfParticles = 20;
+let numberOfParticles = (canvas.width * canvas.height) / 5000;
+// let numberOfParticles = 20;
 
 const mouse = {
     x: 0,
@@ -34,6 +34,17 @@ class Particle {
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = this.color;
         ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius * 0.8, 0, Math.PI * 1.5, true);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+
+        ctx.fillStyle = 'white';
+        ctx.strokeStyle = 'black';
+        ctx.font = this.radius + 'px Verdana';
+        ctx.fillText(this.text, this.x - this.radius / 2.9, this.y);
         ctx.closePath();
     }
 }
@@ -75,7 +86,7 @@ function animate() {
         particles[i].draw();
     }
     if (particles.length >= numberOfParticles) {
-        for (let i = 0; i < 18; i++) {
+        for (let i = 0; i < 5; i++) {
             particles.pop();
         }
     }
