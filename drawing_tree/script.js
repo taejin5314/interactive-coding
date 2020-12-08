@@ -3,6 +3,17 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+let mouse = {
+    x: undefined,
+    y: undefined,
+}
+
+window.addEventListener('mousedown', function (e) {
+    mouse.x = e.x;
+    mouse.y = e.y;
+    drawTree(mouse.x, canvas.height, 120, 0, 2, 'blue')
+})
+
 function drawGrass(color) {
     ctx.beginPath();
     ctx.moveTo(0, canvas.height);
@@ -17,13 +28,30 @@ function drawGrass(color) {
     ctx.fill();
 }
 
-function drawTree(startX, len, angle, branchWidth, color) {
+function drawTree(startX, startY, len, angle, branchWidth, color) {
     ctx.beginPath();
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = branchWidth;
+    ctx.translate(startX, startY);
+    ctx.rotate(angle * Math.PI / 180);
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, -len);
+    ctx.stroke();
+
+    if (len < 10) {
+        ctx.restore();
+        return;
+    }
+
+    drawTree(0, -len, len * 0.75, angle + 5, branchWidth);
+    drawTree(0, -len, len * 0.75, angle - 5, branchWidth);
+
+    ctx.restore();
 }
 
 function init() {
     drawGrass('grey');
-
 }
 
 init();
