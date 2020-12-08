@@ -6,9 +6,11 @@ canvas.height = window.innerHeight;
 function drawGrass(color) {
     ctx.beginPath();
     ctx.moveTo(0, canvas.height);
-    for (let i = 0; i < canvas.width; i += 10) {
-        ctx.quadraticCurveTo(i, canvas.height - 20, i + 15, canvas.height - 25)
-        ctx.quadraticCurveTo(i + 10, canvas.height - 20, i + 10, canvas.height)
+    for (let i = 0; i < canvas.width; i += Math.random() * 5) {
+        let w = Math.random() * 5;
+        let h = Math.random() * 10 + 10;
+        ctx.quadraticCurveTo(i, canvas.height - (h - 10), i + w, canvas.height - h)
+        ctx.quadraticCurveTo(i + w, canvas.height - (h - 10), i + w / 2, canvas.height)
     }
     ctx.stroke();
     ctx.fillStyle = 'grey';
