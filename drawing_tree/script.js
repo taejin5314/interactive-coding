@@ -17,8 +17,13 @@ function drawGrass(color) {
     ctx.fill();
 }
 
+function drawTree(startX, len, angle, branchWidth, color) {
+    ctx.beginPath();
+}
+
 function init() {
-    drawGrass('grey')
+    drawGrass('grey');
+
 }
 
 init();
