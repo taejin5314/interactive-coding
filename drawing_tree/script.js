@@ -13,8 +13,18 @@ function drawGrass(color) {
         ctx.quadraticCurveTo(i + w, canvas.height - (h - 10), i + w / 2, canvas.height)
     }
     ctx.stroke();
-    ctx.fillStyle = 'grey';
+    ctx.fillStyle = color;
     ctx.fill();
 }
 
-drawGrass('black');
+function init() {
+    drawGrass('grey')
+}
+
+init();
+
+window.addEventListener('resize', function () {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+    init();
+})
