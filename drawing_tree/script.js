@@ -31,6 +31,12 @@ function drawGrass(color) {
     ctx.fill();
 }
 
+function drawLine(len) {
+    amount = amount === 1 ? 0 : amount + 0.05;
+    ctx.lineTo(0, -len * amount);
+    ctx.stroke();
+}
+
 function drawTree(startX, startY, len, angle, branchWidth, color) {
     ctx.beginPath();
     ctx.save();
@@ -39,11 +45,7 @@ function drawTree(startX, startY, len, angle, branchWidth, color) {
     ctx.translate(startX, startY);
     ctx.rotate(angle * Math.PI / 180);
     ctx.moveTo(0, 0);
-    ctx.lineTo(0, -len);
-    setInterval(function () {
-        amount += 0.05
-    }, 20)
-    ctx.stroke();
+    drawLine(len);
 
     if (len < 10) {
         ctx.restore();
