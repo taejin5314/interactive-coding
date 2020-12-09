@@ -7,8 +7,8 @@ let mouse = {
     x: undefined,
     y: undefined,
 }
-let currentX;
-let currentY;
+
+let amount = 0;
 
 window.addEventListener('mousedown', function (e) {
     mouse.x = e.x;
@@ -16,21 +16,6 @@ window.addEventListener('mousedown', function (e) {
     drawTree(mouse.x, canvas.height, 120, 0, 2, 'blue')
 })
 
-function steps(startX, startY, endX, endY, color) {
-    const speed = 0.5;
-    // let stepX = (endX - startX) / speed;
-    let stepY = (endY - startY) / speed;
-    // currentX = currentX < endX ? currentX += stepX : currentX;
-    currentY = currentY < endY ? currentY += stepY : currentY;
-    // ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.beginPath();
-    ctx.moveTo(0, startY);
-    ctx.lineTo(0, currentY);
-
-    ctx.strokeStyle = color;
-    ctx.stroke();
-    window.requestAnimationFrame(steps);
-}
 
 function drawGrass(color) {
     ctx.beginPath();
@@ -53,10 +38,12 @@ function drawTree(startX, startY, len, angle, branchWidth, color) {
     ctx.lineWidth = branchWidth;
     ctx.translate(startX, startY);
     ctx.rotate(angle * Math.PI / 180);
-    // ctx.moveTo(0, 0);
-    steps(0, 0, 0, -len, color)
-    // ctx.lineTo(0, -len);
-    // ctx.stroke();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, -len);
+    setInterval(function () {
+        amount += 0.05
+    }, 20)
+    ctx.stroke();
 
     if (len < 10) {
         ctx.restore();
