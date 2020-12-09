@@ -15,8 +15,7 @@ const speed = 5;
 window.addEventListener('mousedown', function (e) {
     mouse.x = e.x;
     mouse.y = e.y;
-    // drawTree(mouse.x, canvas.height, 120, 0, 2, 'blue', 5)
-    drawLine();
+    drawTree(mouse.x, canvas.height, 120, 0, 2, 'blue', 5)
 })
 
 
@@ -36,7 +35,6 @@ function drawGrass(color) {
 
 
 function drawTree(startX, startY, len, angle, branchWidth, color, speed) {
-    let currentY = startY;
     ctx.beginPath();
     ctx.save();
     ctx.strokeStyle = color;
