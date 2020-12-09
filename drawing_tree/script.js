@@ -8,12 +8,15 @@ let mouse = {
     y: undefined,
 }
 
-let amount = 0;
+let currentX = 0;
+let currentY = 0;
+const speed = 5;
 
 window.addEventListener('mousedown', function (e) {
     mouse.x = e.x;
     mouse.y = e.y;
-    drawTree(mouse.x, canvas.height, 120, 0, 2, 'blue')
+    // drawTree(mouse.x, canvas.height, 120, 0, 2, 'blue', 5)
+    drawLine();
 })
 
 
@@ -31,13 +34,9 @@ function drawGrass(color) {
     ctx.fill();
 }
 
-function drawLine(len) {
-    amount = amount === 1 ? 0 : amount + 0.05;
-    ctx.lineTo(0, -len * amount);
-    ctx.stroke();
-}
 
-function drawTree(startX, startY, len, angle, branchWidth, color) {
+function drawTree(startX, startY, len, angle, branchWidth, color, speed) {
+    let currentY = startY;
     ctx.beginPath();
     ctx.save();
     ctx.strokeStyle = color;
@@ -45,7 +44,8 @@ function drawTree(startX, startY, len, angle, branchWidth, color) {
     ctx.translate(startX, startY);
     ctx.rotate(angle * Math.PI / 180);
     ctx.moveTo(0, 0);
-    drawLine(len);
+    ctx.lineTo(0, -len);
+    ctx.stroke();
 
     if (len < 10) {
         ctx.restore();
@@ -56,6 +56,22 @@ function drawTree(startX, startY, len, angle, branchWidth, color) {
     drawTree(0, -len, len * 0.75, angle - 5, branchWidth);
 
     ctx.restore();
+}
+
+function drawLine() {
+
+    currentY += speed;
+
+    if (currentY < 500) {
+        requestAnimationFrame(drawLine);
+        ctx.beginPath();
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = '15';
+        ctx.moveTo(0, 0)
+        ctx.lineTo(0, currentY);
+        ctx.stroke();
+    }
+
 }
 
 function init() {
