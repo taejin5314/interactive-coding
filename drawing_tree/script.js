@@ -23,8 +23,8 @@ window.addEventListener('mousedown', function (e) {
     mouse.x = e.x;
     mouse.y = e.y;
     // drawTree(mouse.x, treeCanvas.height, 120, 0, 2, 'blue', 5)
-    const tree = new Tree(mouse.x, 15, 'white');
-    tree.draw()
+    const tree = new Tree(mouse.x, treeCanvas.height, 80, 0, 10, 'white');
+    tree.drawTree()
 })
 
 
@@ -43,18 +43,33 @@ function drawGrass(color) {
 }
 
 class Tree {
-    constructor(x, branchWidth, color) {
+    constructor(x, y, len, angle, branchWidth, color) {
         this.x = x;
-        this.y = treeCanvas.height;
-        this.height = 60;
-        this.branchWidth = branchWidth;
+        this.y = y;
+        this.angle = angle;
+        this.height = len * Math.random() + 80;
+        this.branchWidth = branchWidth * Math.random() + 10;
         this.color = color;
-        this.speed = 1;
+        this.speed = 2;
     }
 
-    draw() {
-        this.currentY = this.y;
+    drawTree() {
+        this.drawBranch(this.x, this.y, this.height, this.angle, this.branchWidth);
+    }
+
+    drawBranch(startX, startY, len, angle, branchWidth) {
+        this.currentY = startY;
+        this.height = len;
+        // treeCtx.translate(startX, startY);
+        // treeCtx.rotate(angle * Math.PI / 180);
         this.branchAnimate();
+
+        if (len < 10) {
+            treeCtx.restore();
+            return;
+        }
+
+        // this.drawBranch(0, -len, len * Math.random() * 0.7, angle + 5, branchWidth * 0.7);
     }
 
     branchAnimate() {
@@ -67,6 +82,8 @@ class Tree {
         treeCtx.stroke();
 
         this.currentY = (this.currentY >= this.y - this.height) ? this.currentY - this.speed : this.currentY;
+
+        treeCtx.restore();
     }
 }
 
