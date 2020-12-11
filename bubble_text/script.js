@@ -30,11 +30,24 @@ class Particle {
         this.baseX = this.x;
         this.baseY = this.y;
         this.density = (Math.random() * 30) + 1;
+        this.distance;
     }
     draw() {
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.strokeStyle = 'rgba(34, 147, 214, 1)';
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+
+        if (this.distance < mouse.radius - 5) {
+            this.size = 10;
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        } else if (this.distance <= mouse.radius) {
+            this.size = 15;
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        } else {
+            this.size = 20;
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        }
+
         ctx.closePath();
         ctx.fill();
     }
@@ -42,6 +55,7 @@ class Particle {
         let dx = mouse.x - this.x;
         let dy = mouse.y - this.y;
         let distance = Math.sqrt(dx * dx + dy * dy);
+        this.distance = distance;
         let forceDirectionX = dx / distance;
         let forceDirectionY = dy / distance;
         let maxDistance = mouse.radius;
@@ -86,7 +100,7 @@ function animate() {
         particleArray[i].draw();
         particleArray[i].update();
     }
-    connect();
+    // connect();
     requestAnimationFrame(animate);
 }
 
