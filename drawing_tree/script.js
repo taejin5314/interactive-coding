@@ -1,7 +1,14 @@
-const canvas = document.getElementById('canvas1');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function initializeCanvas(canvasName) {
+    const canvas = document.getElementById(canvasName);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    return canvas;
+}
+
+const grassCanvas = initializeCanvas('canvas1');
+const grassCtx = grassCanvas.getContext('2d');
+const treeCanvas = initializeCanvas('canvas2');
+const treeCtx = treeCanvas.getContext('2d');
 
 let mouse = {
     x: undefined,
@@ -15,61 +22,74 @@ const speed = 5;
 window.addEventListener('mousedown', function (e) {
     mouse.x = e.x;
     mouse.y = e.y;
-    drawTree(mouse.x, canvas.height, 120, 0, 2, 'blue', 5)
+    // drawTree(mouse.x, treeCanvas.height, 120, 0, 2, 'blue', 5)
+    const tree = new Tree(mouse.x, 15, 'white');
+    tree.draw()
 })
 
 
 function drawGrass(color) {
-    ctx.beginPath();
-    ctx.moveTo(0, canvas.height);
-    for (let i = 0; i < canvas.width; i += Math.random() * 5) {
+    grassCtx.beginPath();
+    grassCtx.moveTo(0, grassCanvas.height);
+    for (let i = 0; i < grassCanvas.width; i += Math.random() * 5) {
         let w = Math.random() * 5;
         let h = Math.random() * 10 + 10;
-        ctx.quadraticCurveTo(i, canvas.height - (h - 10), i + w, canvas.height - h)
-        ctx.quadraticCurveTo(i + w, canvas.height - (h - 10), i + w / 2, canvas.height)
+        grassCtx.quadraticCurveTo(i, grassCanvas.height - (h - 10), i + w, grassCanvas.height - h)
+        grassCtx.quadraticCurveTo(i + w, grassCanvas.height - (h - 10), i + w / 2, grassCanvas.height)
     }
-    ctx.stroke();
-    ctx.fillStyle = color;
-    ctx.fill();
+    grassCtx.stroke();
+    grassCtx.fillStyle = color;
+    grassCtx.fill();
 }
 
+class Tree {
+    constructor(x, branchWidth, color) {
+        this.x = x;
+        this.y = treeCanvas.height;
+        this.height = 60;
+        this.branchWidth = branchWidth;
+        this.color = color;
+        this.speed = 1;
+    }
+
+    draw() {
+        this.currentY = this.y;
+        this.branchAnimate();
+    }
+
+    branchAnimate() {
+        requestAnimationFrame(this.branchAnimate.bind(this));
+        treeCtx.beginPath();
+        treeCtx.lineWidth = this.branchWidth;
+        treeCtx.strokeStyle = this.color;
+        treeCtx.moveTo(this.x, this.currentY);
+        treeCtx.lineTo(this.x, this.currentY - this.speed);
+        treeCtx.stroke();
+
+        this.currentY = (this.currentY >= this.y - this.height) ? this.currentY - this.speed : this.currentY;
+    }
+}
 
 function drawTree(startX, startY, len, angle, branchWidth, color, speed) {
-    ctx.beginPath();
-    ctx.save();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = branchWidth;
-    ctx.translate(startX, startY);
-    ctx.rotate(angle * Math.PI / 180);
-    ctx.moveTo(0, 0);
-    ctx.lineTo(0, -len);
-    ctx.stroke();
+    treeCtx.beginPath();
+    treeCtx.save();
+    treeCtx.strokeStyle = color;
+    treeCtx.lineWidth = branchWidth;
+    treeCtx.translate(startX, startY);
+    treeCtx.rotate(angle * Math.PI / 180);
+    treeCtx.moveTo(0, 0);
+    treeCtx.lineTo(0, -len);
+    treeCtx.stroke();
 
     if (len < 10) {
-        ctx.restore();
+        treeCtx.restore();
         return;
     }
 
     drawTree(0, -len, len * 0.75, angle + 5, branchWidth);
     drawTree(0, -len, len * 0.75, angle - 5, branchWidth);
 
-    ctx.restore();
-}
-
-function drawLine() {
-
-    currentY += speed;
-
-    if (currentY < 500) {
-        requestAnimationFrame(drawLine);
-        ctx.beginPath();
-        ctx.strokeStyle = 'white';
-        ctx.lineWidth = '15';
-        ctx.moveTo(0, 0)
-        ctx.lineTo(0, currentY);
-        ctx.stroke();
-    }
-
+    treeCtx.restore();
 }
 
 function init() {
@@ -79,7 +99,9 @@ function init() {
 init();
 
 window.addEventListener('resize', function () {
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
+    grassCanvas.width = innerWidth;
+    grassCanvas.height = innerHeight;
+    treeCanvas.width = innerWidth;
+    treeCanvas.height = innerHeight;
     init();
 })
