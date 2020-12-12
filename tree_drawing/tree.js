@@ -18,4 +18,8 @@ export class Tree {
 
     }
 
+    animate(ctx) {
+        requestAnimationFrame(this.animate.bind(this));
+        ctx.
+    }
 }
