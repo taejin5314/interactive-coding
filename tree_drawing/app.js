@@ -31,6 +31,7 @@ class App {
 
     animate(t) {
         requestAnimationFrame(this.animate.bind(this));
+
     }
 }
 
