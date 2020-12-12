@@ -22,14 +22,15 @@ class App {
         this.ctx.scale(2, 2);
 
         this.grass.resize(this.stageWidth, this.stageHeight)
+        this.draw();
+    }
+
+    draw() {
+        this.grass.draw(this.ctx);
     }
 
     animate(t) {
         requestAnimationFrame(this.animate.bind(this));
-
-        this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
-
-        this.grass.draw(this.ctx);
     }
 }
 
