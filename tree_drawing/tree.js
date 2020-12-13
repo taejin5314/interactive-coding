@@ -29,6 +29,8 @@ export class Tree {
         this.trunkMin = 6;  // trunk base width ,min and max
         this.trunkMax = 10;
         this.maxBranches = 200;
+
+        this.treeSeed = Math.random() * 10000 | 0;
     }
 
     resize(stageWidth, stageHeight) {
@@ -59,7 +61,7 @@ export class Tree {
         ctx.lineTo(x, y);
         ctx.stroke();
 
-        if (branchCount < maxBranches && leng > 5 && width > 1) {
+        if (this.branchCount < this.maxBranches && leng > 5 && width > 1) {
             const rDir = this.randSI() ? -1 : 1;
 
             this.treeGrow -= 0.2;
@@ -79,8 +81,8 @@ export class Tree {
         }
     }
 
-    animate(ctx) {
+    animate(ctx, x) {
         requestAnimationFrame(this.animate.bind(this));
-        ctx.
+        this.draw(ctx, x, this.treeSeed)
     }
 }
