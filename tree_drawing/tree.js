@@ -14,7 +14,7 @@ export class Tree {
         this.stageHeight = stageHeight;
     }
 
-    draw(ctx, x, y) {
+    draw(ctx, x) {
 
     }
 
