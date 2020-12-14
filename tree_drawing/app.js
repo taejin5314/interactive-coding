@@ -4,10 +4,16 @@ import { Tree } from './tree.js';
 class App {
     constructor() {
         this.grassCanvas = document.createElement('canvas');
+        this.grassCanvas.style.position = 'absolute';
+        this.grassCanvas.style.left = '0'
+        this.grassCanvas.style.top = '0'
         this.grassCtx = this.grassCanvas.getContext('2d');
         document.body.appendChild(this.grassCanvas);
 
         this.treeCanvas = document.createElement('canvas');
+        this.treeCanvas.style.position = 'absolute';
+        this.treeCanvas.style.left = '0'
+        this.treeCanvas.style.top = '0'
         this.treeCtx = this.treeCanvas.getContext('2d');
         document.body.appendChild(this.treeCanvas);
 
