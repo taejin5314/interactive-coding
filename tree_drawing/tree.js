@@ -43,7 +43,7 @@ export class Tree {
         this.treeGrow += 0.02;
         this.randSeed(seed);
         this.maxTrunk = this.randSI(this.trunkMin, this.trunkMax);
-
+        this.drawBranch(x, this.stageHeight, -Math.PI / 2, canvas.height / 5, this.maxTrunk)
     }
 
     drawBranch(x, y, dir, leng, width, ctx) {

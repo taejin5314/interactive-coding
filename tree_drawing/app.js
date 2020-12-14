@@ -1,4 +1,5 @@
 import { Grass } from './grass.js';
+import { Tree } from './tree.js';
 
 class App {
     constructor() {
@@ -10,6 +11,7 @@ class App {
 
         window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
+
 
         requestAnimationFrame(this.animate.bind(this))
     }
@@ -23,10 +25,14 @@ class App {
 
         this.grass.resize(this.stageWidth, this.stageHeight)
         this.draw();
+
     }
 
     draw() {
         this.grass.draw(this.ctx);
+        window.addEventListener('mousedown', function (e) {
+            console.log(e.x);
+        })
     }
 
     animate(t) {
