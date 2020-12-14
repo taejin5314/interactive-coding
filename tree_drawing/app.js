@@ -3,9 +3,13 @@ import { Tree } from './tree.js';
 
 class App {
     constructor() {
-        this.canvas = document.createElement('canvas');
-        this.ctx = this.canvas.getContext('2d');
-        document.body.appendChild(this.canvas);
+        this.grassCanvas = document.createElement('canvas');
+        this.grassCtx = this.grassCanvas.getContext('2d');
+        document.body.appendChild(this.grassCanvas);
+
+        this.treeCanvas = document.createElement('canvas');
+        this.treeCtx = this.treeCanvas.getContext('2d');
+        document.body.appendChild(this.treeCanvas);
 
         this.grass = new Grass('gray');
 
@@ -19,9 +23,13 @@ class App {
         this.stageWidth = document.body.clientWidth;
         this.stageHeight = document.body.clientHeight;
 
-        this.canvas.width = this.stageWidth * 2;
-        this.canvas.height = this.stageHeight * 2;
-        this.ctx.scale(2, 2);
+        this.grassCanvas.width = this.stageWidth * 2;
+        this.grassCanvas.height = this.stageHeight * 2;
+        this.grassCtx.scale(2, 2);
+
+        this.treeCanvas.width = this.stageWidth * 2;
+        this.treeCanvas.height = this.stageHeight * 2;
+        this.treeCtx.scale(2, 2);
 
         this.grass.resize(this.stageWidth, this.stageHeight)
         this.draw();
@@ -29,16 +37,16 @@ class App {
     }
 
     draw() {
-        this.grass.draw(this.ctx);
+        this.grass.draw(this.grassCtx);
+        const treeCtx = this.treeCtx;
+        const treeCtxWidth = this.stageWidth;
+        const treeCtxHeight = this.stageHeight;
         window.addEventListener('mousedown', function (e) {
-            console.log(e.x);
+            this.tree = new Tree(treeCtx, e.x, treeCtxWidth, treeCtxHeight, 10, 80, 0, 10);
+            this.tree.animate();
         })
     }
 
-    animate(t) {
-        requestAnimationFrame(this.animate.bind(this));
-
-    }
 }
 
 window.onload = () => {

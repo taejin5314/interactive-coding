@@ -1,5 +1,7 @@
 export class Tree {
-    constructor(stageWidth, stageHeight, branchWidth, branchLength, branchAngle, complexity) {
+    constructor(ctx, x, stageWidth, stageHeight, branchWidth, branchLength, branchAngle, complexity) {
+        this.ctx = ctx;
+        this.x = x;
         this.stageWidth = stageWidth;
         this.stageHeight = stageHeight;
         this.branchWidth = branchWidth;
@@ -12,9 +14,9 @@ export class Tree {
             var seed = 1;
             return { max: 2576436549074795, reseed(s) { seed = s }, random() { return seed = ((8765432352450986 * seed) + 8507698654323524) % this.max } }
         })();
-        this.randSeed = (seed) => seededRandom.reseed(seed | 0);
-        this.randSI = (min = 2, max = min + (min = 0)) => (seededRandom.random() % (max - min)) + min;
-        this.randS = (min = 1, max = min + (min = 0)) => (seededRandom.random() / seededRandom.max) * (max - min) + min;
+        this.randSeed = (seed) => this.seededRandom.reseed(seed | 0);
+        this.randSI = (min = 2, max = min + (min = 0)) => (this.seededRandom.random() % (max - min)) + min;
+        this.randS = (min = 1, max = min + (min = 0)) => (this.seededRandom.random() / this.seededRandom.max) * (max - min) + min;
 
         this.branchCount = 0;
         this.maxTrunk = 0;
@@ -38,40 +40,42 @@ export class Tree {
         this.stageHeight = stageHeight;
     }
 
-    draw(ctx, x, seed) {
+    draw(seed) {
         this.branchCount = 0;
         this.treeGrow += 0.02;
         this.randSeed(seed);
         this.maxTrunk = this.randSI(this.trunkMin, this.trunkMax);
-        this.drawBranch(x, this.stageHeight, -Math.PI / 2, canvas.height / 5, this.maxTrunk)
+        // console.log(x, this.stageHeight, -Math.PI / 2, this.stageHeight / 5, this.maxTrunk)
+        this.drawBranch(this.x, this.stageHeight, -Math.PI / 2, this.stageHeight / 5, this.maxTrunk)
     }
 
-    drawBranch(x, y, dir, leng, width, ctx) {
+    drawBranch(x, y, dir, leng, width) {
         this.branchCount++;
         const treeGrowVal = (this.treeGrow > 1 ? 1 : this.treeGrow < 0.1 ? 0.1 : this.treeGrow) ** 2;
 
         const xx = Math.cos(dir) * leng * treeGrowVal;
         const yy = Math.sin(dir) * leng * treeGrowVal;
 
-        ctx.lineWidth = width;
-        ctx.beginPath();
-        ctx.lineTo(x, y);
+        this.ctx.lineWidth = width;
+        this.ctx.strokeStyle = 'white'
+        this.ctx.beginPath();
+        this.ctx.lineTo(x, y);
         x += Math.cos(dir) * leng * treeGrowVal;
         y += Math.sin(dir) * leng * treeGrowVal;
-        ctx.lineTo(x, y);
-        ctx.stroke();
+        this.ctx.lineTo(x, y);
+        this.ctx.stroke();
 
         if (this.branchCount < this.maxBranches && leng > 5 && width > 1) {
             const rDir = this.randSI() ? -1 : 1;
 
             this.treeGrow -= 0.2;
-            drawBranch(
+            this.drawBranch(
                 x, y,
                 dir + this.randS(this.angMin, this.angMax) * rDir,
                 leng * this.randS(this.lengMin, this.lengMax),
                 width * this.randS(this.widthMin, this.widthMax)
             );
-            drawBranch(
+            this.drawBranch(
                 x, y,
                 dir + this.randS(this.angMin, this.angMax) * -rDir,
                 leng * this.randS(this.lengMin, this.lengMax),
@@ -81,8 +85,9 @@ export class Tree {
         }
     }
 
-    animate(ctx, x) {
+    animate() {
+        this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight)
+        this.draw(this.treeSeed)
         requestAnimationFrame(this.animate.bind(this));
-        this.draw(ctx, x, this.treeSeed)
     }
 }
