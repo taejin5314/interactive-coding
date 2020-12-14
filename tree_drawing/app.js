@@ -15,9 +15,6 @@ class App {
 
         window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
-
-
-        requestAnimationFrame(this.animate.bind(this))
     }
     resize() {
         this.stageWidth = document.body.clientWidth;

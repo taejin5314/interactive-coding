@@ -53,9 +53,6 @@ export class Tree {
         this.branchCount++;
         const treeGrowVal = (this.treeGrow > 1 ? 1 : this.treeGrow < 0.1 ? 0.1 : this.treeGrow) ** 2;
 
-        const xx = Math.cos(dir) * leng * treeGrowVal;
-        const yy = Math.sin(dir) * leng * treeGrowVal;
-
         this.ctx.lineWidth = width;
         this.ctx.strokeStyle = 'white'
         this.ctx.beginPath();
@@ -85,9 +82,13 @@ export class Tree {
         }
     }
 
+
     animate() {
         this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight)
         this.draw(this.treeSeed)
+        if (this.branchCount > this.maxBranches) {
+            this.branchCount = 0;
+        }
         requestAnimationFrame(this.animate.bind(this));
     }
 }
