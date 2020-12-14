@@ -41,7 +41,7 @@ export class Tree {
         this.randSeed(seed);
         this.maxTrunk = this.randSI(this.trunkMin, this.trunkMax);
         // console.log(x, this.stageHeight, -Math.PI / 2, this.stageHeight / 5, this.maxTrunk)
-        this.drawBranch(this.x, this.stageHeight, -Math.PI / 2, this.stageHeight / 5, this.maxTrunk)
+        this.drawBranch(this.x, this.stageHeight, -Math.PI / 2, this.branchLength, this.branchWidth)
 
     }
 
@@ -58,7 +58,7 @@ export class Tree {
         this.ctx.lineTo(x, y);
         this.ctx.stroke();
 
-        if (this.branchCount < this.maxBranches && leng > 5 && width > 1) {
+        if (this.branchCount < this.maxBranches && leng > 15 && width > 1) {
             const rDir = this.randSI() ? -1 : 1;
 
             this.treeGrow -= 0.2;

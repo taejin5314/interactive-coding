@@ -45,7 +45,7 @@ class App {
         const treeCtxWidth = this.stageWidth;
         const treeCtxHeight = this.stageHeight;
         window.addEventListener('mousedown', function (e) {
-            this.tree = new Tree(treeCtx, e.x, treeCtxWidth, treeCtxHeight, 10, 80, 0, 10);
+            this.tree = new Tree(treeCtx, e.x, treeCtxWidth, treeCtxHeight, 10 * Math.random() + 10, 100 * Math.random() + 50, 0, 10);
             this.tree.animate();
         })
     }
