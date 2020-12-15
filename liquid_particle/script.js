@@ -62,8 +62,48 @@ function drawButtons() {
     }
 }
 
+class Particle {
+    constructor(x, y, size, weight) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.weight = weight;
+    }
+    update() {
+        if (this.y > canvas.height) {
+            this.y = 0 - this.size;
+            this.x = (Math.random() * 60) + 120;
+            this.weight = (Math.random() * 0.2) + 0.1;
+        }
+        this.y += this.weight;
+    }
+    draw() {
+        ctx.fillStyle = 'rgba(128, 197, 222,1)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+}
+
+const particleArray = [];
+const numberOfParticles = 80;
+function createParticles() {
+    for (let i = 0; i < numberOfParticles; i++) {
+        const x = (Math.random() * 60) + 200;
+        const y = (Math.random() * canvas.height);
+        const size = (Math.random() * 20) + 5;
+        const weight = (Math.random() * 0.2) + 0.1;
+        particleArray.push(new Particle(x, y, size, weight))
+    }
+}
+createParticles();
+
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particleArray.length; i++) {
+        particleArray[i].update();
+        particleArray[i].draw();
+    }
     drawButtons();
     requestAnimationFrame(animate);
 }
