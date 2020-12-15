@@ -61,3 +61,14 @@ button:nth-child(5)::before {
 button:hover::before {
     transform: translateX(-50px);
 }
+.mainBlock {
+    width: 100%;
+    min-width: 500px;
+    height: 270px;
+    border: 3px solid black;
+    position: absolute;
+    padding: 38px 60px;
+    background: #000;
+    color: white;
+    font-size: 14px;
+}
