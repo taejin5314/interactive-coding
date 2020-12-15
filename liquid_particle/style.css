@@ -83,3 +83,31 @@ button:hover::before {
     position: absolute;
     left: 60px;
 }
+.topBlock > div {
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    text-align: center;
+}
+
+.bottomBlock {
+    border: 2[x] solid #000;
+    color: black;
+    bottom: -140px;
+    height: 140px;
+    color: black;
+    left: 70px;
+    width: 80%;
+    position: absolute;
+}
+.bottomBlock > div {
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
