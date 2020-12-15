@@ -26,8 +26,10 @@ class Button {
         let directionX = 2.2;
         if ((mouse.x < this.x + this.width && mouse.x > this.x && mouse.y < this.y + this.height && mouse.y > this.y) && (this.x > this.baseX - 50)) {
             this.x -= directionX;
+            this.width += directionX;
         } else if (this.x < this.baseX) {
             this.x += directionX;
+            this.width -= directionX;
         }
     }
     draw() {
@@ -41,7 +43,7 @@ class Button {
 const buttons = [];
 function createButtons() {
     for (let i = 0; i < 5; i++) {
-        let topMargin = 100;
+        let topMargin = 208;
         let buttonMargin = 5;
         let x = 150;
         let y = topMargin + ((50 + buttonMargin) * i);
@@ -60,3 +62,15 @@ function drawButtons() {
     }
 }
 
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawButtons();
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+window.addEventListener('resize', function (e) {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+})
