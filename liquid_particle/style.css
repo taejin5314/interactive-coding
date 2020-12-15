@@ -78,8 +78,8 @@ button:hover::before {
     width: 80%;
     border: 2px solid #000;
     color: black;
-    height: 70px;
-    top: -70px;
+    height: 120px;
+    top: -120px;
     position: absolute;
     left: 60px;
 }
@@ -94,7 +94,7 @@ button:hover::before {
 }
 
 .bottomBlock {
-    border: 2[x] solid #000;
+    border: 2px solid #000;
     color: black;
     bottom: -140px;
     height: 140px;
