@@ -58,7 +58,7 @@ createButtons();
 function drawButtons() {
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].update();
-        buttons[i].draw();
+        // buttons[i].draw();
     }
 }
 
