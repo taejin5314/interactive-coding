@@ -68,8 +68,17 @@ class Particle {
         this.y = y;
         this.size = size;
         this.weight = weight;
+        this.flowingRight = false;
     }
     update() {
+        for (let i = 0; i < buttons.length; i++) {
+            if (this.x < buttons[i].x + buttons[i].width && this.x > buttons[i].x && this.y < buttons[i].y + buttons[i].height && this.y > buttons[i].y) {
+                this.weight = 0;
+                this.x -= 4;
+            } else {
+                this.weight += 0.03
+            }
+        }
         if (this.y > canvas.height) {
             this.y = 0 - this.size;
             this.x = (Math.random() * 60) + 120;
