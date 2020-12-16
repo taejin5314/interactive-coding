@@ -71,10 +71,19 @@ class Particle {
         this.flowingRight = false;
     }
     update() {
+        if (this.x > mouse.x - 50 && this.x < mouse.x + 50 && this.y > mouse.y - 5 && this.y < mouse.y + 5) {
+            this.x -= this.weight;
+            this.y += this.weight;
+            this.flowingRight = true;
+        }
         for (let i = 0; i < buttons.length; i++) {
             if (this.x < buttons[i].x + buttons[i].width && this.x > buttons[i].x && this.y < buttons[i].y + buttons[i].height && this.y > buttons[i].y) {
                 this.weight = 0;
-                this.x -= 4;
+                if (!this.flowingRight) {
+                    this.x -= 4;
+                } else {
+                    this.x += 4;
+                }
             } else {
                 this.weight += 0.03
             }
@@ -83,6 +92,7 @@ class Particle {
             this.y = 0 - this.size;
             this.x = (Math.random() * 60) + 120;
             this.weight = (Math.random() * 0.2) + 0.1;
+            this.flowingRight = false;
         }
         this.y += this.weight;
     }
