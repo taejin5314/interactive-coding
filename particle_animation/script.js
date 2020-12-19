@@ -18,7 +18,8 @@ class Particle {
 
     }
     draw() {
-        ctx.fillRect(this.x, this.y, this.size, this.size)
+        // ctx.fillRect(this.x, this.y, this.size, this.size);
+        ctx.drawImage(pumpkin, this.x, this.y, this.size, this.size);
     }
     update() {
         if (this.y > canvas.height) {
