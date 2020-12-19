@@ -19,6 +19,9 @@ class Particle {
         ctx.fillRect(this.x, this.y, this.size, this.size)
     }
     update() {
+        if (this.y > canvas.height) {
+            this.y = 0 - this.size;
+        }
         this.y += this.speed;
     }
 }
