@@ -7,6 +7,9 @@ let particlesArray = [];
 const pumpkin = new Image();
 pumpkin.src = 'pumpkin1.png';
 
+ctx.translate(50, 50);
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
@@ -24,6 +27,9 @@ class Particle {
     update() {
         if (this.y > canvas.height) {
             this.y = 0 - this.size;
+            this.x = Math.random() * canvas.width;
+            this.size = Math.random() * 100 + 50;
+            this.speed = Math.random() * 5 + 1;
         }
         this.y += this.speed;
     }
@@ -32,6 +38,7 @@ class Particle {
 const particle1 = new Particle();
 
 function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     particle1.update();
     particle1.draw();
     requestAnimationFrame(animate);
