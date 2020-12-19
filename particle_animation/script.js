@@ -4,6 +4,8 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 const numberOfParticles = 200;
 let particlesArray = [];
+const pumpkin = new Image();
+pumpkin.src = 'pumpkin1.png';
 
 class Particle {
     constructor() {
