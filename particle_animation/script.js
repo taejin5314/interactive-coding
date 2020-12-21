@@ -8,7 +8,7 @@ const pumpkin = new Image();
 pumpkin.src = 'pumpkin1.png';
 
 ctx.translate(180, 150);
-ctx.fillStyle = 'black'
+ctx.rotate(Math.PI / 360 * 30);
 ctx.fillRect(0, 0, 100, 150)
 
 class Particle {
@@ -45,4 +45,4 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-animate();
+// animate();
