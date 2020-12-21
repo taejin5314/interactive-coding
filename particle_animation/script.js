@@ -7,9 +7,9 @@ let particlesArray = [];
 const pumpkin = new Image();
 pumpkin.src = 'pumpkin1.png';
 
-ctx.translate(180, 150);
-ctx.rotate(Math.PI / 360 * 30);
-ctx.fillRect(0, 0, 100, 150)
+// ctx.translate(180, 150);
+// ctx.rotate(Math.PI / 360 * 30);
+// ctx.fillRect(0, 0, 100, 150)
 
 class Particle {
     constructor() {
@@ -23,6 +23,7 @@ class Particle {
     }
     draw() {
         // ctx.fillRect(this.x, this.y, this.size, this.size);
+        ctx.translate(2, 2);
         ctx.drawImage(pumpkin, this.x, this.y, this.size, this.size);
     }
     update() {
@@ -45,4 +46,4 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// animate();
+animate();
