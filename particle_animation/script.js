@@ -7,7 +7,7 @@ let particlesArray = [];
 const pumpkin = new Image();
 pumpkin.src = 'pumpkin1.png';
 
-ctx.translate(50, 50);
+ctx.translate(180, 150);
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 class Particle {
