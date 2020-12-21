@@ -8,14 +8,15 @@ const pumpkin = new Image();
 pumpkin.src = 'pumpkin1.png';
 
 ctx.translate(180, 150);
-ctx.fillRect(0, 0, 100, 150);
+ctx.fillStyle = 'black'
+ctx.fillRect(0, 0, 100, 150)
 
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
         this.size = Math.random() * 100 + 50;
-        this.speed = Math.random() * 3 + 1;
+        this.speed = Math.random() * 5 + 1;
         this.angle = Math.random() * 360;
         this.spin = Math.random() < 0.5 ? -1 : 1;
 
