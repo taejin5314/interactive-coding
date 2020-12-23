@@ -30,7 +30,7 @@ class Particle {
         if (this.y > canvas.height) {
             this.y = 0 - this.size;
             this.x = Math.random() * canvas.width;
-            this.size = Math.random() * 100 + 50;
+            this.size = Math.random() * 20 + 50;
             this.speed = Math.random() * 5 + 1;
         }
         this.y += this.speed;
