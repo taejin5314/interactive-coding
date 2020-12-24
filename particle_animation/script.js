@@ -22,12 +22,9 @@ class Particle {
 
     }
     draw() {
-        // ctx.fillRect(this.x, this.y, this.size, this.size);
         ctx.save();
         ctx.translate(this.x, this.y);
-        ctx.rotate(this.angle * Math.PI / 360);
-        // ctx.fillStyle = 'red';
-        // ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.rotate(this.angle * Math.PI / 360 * this.spin);
         ctx.drawImage(pumpkin, 0 - this.size / 2, 0 - this.size / 2, this.size, this.size);
         ctx.restore();
     }
@@ -44,12 +41,20 @@ class Particle {
 }
 
 const particle1 = new Particle();
+function init() {
+    for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+    }
+}
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particle1.update();
-    particle1.draw();
+    for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].draw();
+        particlesArray[i].update();
+    }
     requestAnimationFrame(animate);
 }
 
+init();
 animate();
