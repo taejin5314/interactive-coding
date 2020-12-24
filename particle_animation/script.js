@@ -24,13 +24,15 @@ class Particle {
     draw() {
         // ctx.fillRect(this.x, this.y, this.size, this.size);
         ctx.save();
-        ctx.translate(2, 2);
+        ctx.translate(150, 152);
+        ctx.rotate(this.angle * Math.PI / 360);
         ctx.fillStyle = 'red';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(pumpkin, this.x, this.y, this.size, this.size);
         ctx.restore();
     }
     update() {
+        this.angle++;
         if (this.y > canvas.height) {
             this.y = 0 - this.size;
             this.x = Math.random() * canvas.width;
