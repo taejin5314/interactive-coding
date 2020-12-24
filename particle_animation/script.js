@@ -28,7 +28,7 @@ class Particle {
         ctx.rotate(this.angle * Math.PI / 360);
         // ctx.fillStyle = 'red';
         // ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(pumpkin, 0, 0, this.size, this.size);
+        ctx.drawImage(pumpkin, 0 - this.size / 2, 0 - this.size / 2, this.size, this.size);
         ctx.restore();
     }
     update() {
