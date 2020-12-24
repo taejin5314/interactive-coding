@@ -24,7 +24,7 @@ class Particle {
     draw() {
         // ctx.fillRect(this.x, this.y, this.size, this.size);
         ctx.save();
-        ctx.translate(150, 152);
+        ctx.translate(this.x, this.y);
         ctx.rotate(this.angle * Math.PI / 360);
         ctx.fillStyle = 'red';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
