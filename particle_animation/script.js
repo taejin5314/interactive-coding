@@ -7,10 +7,6 @@ let particlesArray = [];
 const pumpkin = new Image();
 pumpkin.src = 'pumpkin1.png';
 
-// ctx.translate(180, 150);
-// ctx.rotate(Math.PI / 360 * 30);
-// ctx.fillRect(0, 0, 100, 150)
-
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
