@@ -6,6 +6,8 @@ const numberOfParticles = 200;
 let particlesArray = [];
 const pumpkin = new Image();
 pumpkin.src = 'pumpkin1.png';
+const pumpkins = new Image();
+pumpkins.src = 'pumpkins.png';
 
 class Particle {
     constructor() {
@@ -15,13 +17,17 @@ class Particle {
         this.speed = Math.random() * 5 + 1;
         this.angle = Math.random() * 360;
         this.spin = Math.random() < 0.5 ? -1 : 1;
-
+        // sprite sheet control
+        this.frameX = Math.floor(Math.random() * 3);
+        this.frameY = Math.floor(Math.random() * 3);
+        this.spriteSize = 900 / 3;
     }
     draw() {
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(this.angle * Math.PI / 360 * this.spin);
-        ctx.drawImage(pumpkin, 0 - this.size / 2, 0 - this.size / 2, this.size, this.size);
+        // ctx.drawImage(pumpkin, 0 - this.size / 2, 0 - this.size / 2, this.size, this.size);
+        ctx.drawImage(pumpkins, this.frameX * this.spriteSize, this.frameY * this.spriteSize, this.spriteSize, this.spriteSize, 0 - this.size / 2, 0 - this.size / 2, this.size, this.size);
         ctx.restore();
     }
     update() {
