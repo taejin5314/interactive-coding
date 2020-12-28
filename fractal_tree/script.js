@@ -16,7 +16,8 @@ function main() {
     branchCanvas = initializeCanvas('canvasTreeBranches');
     const treeLocation = [CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.95];
     drawBranches(branchCanvas, treeLocation, 100, 0, 15);
-    drawLeaves(branchCanvas)
+    drawLeaves(branchCanvas);
+    handleSnowflakes(snowBgCanvas);
 }
 
 function drawLeaves(branchCanvas) {
@@ -77,3 +78,46 @@ function drawBranches(canvas, start, len, angle, branchWidth) {
 }
 
 main();
+
+const snowflakes = new Image();
+snowflakes.src = 'snowflakes.png';
+class Snowflake {
+    constructor() {
+        this.x = Math.random() * CANVAS_WIDTH;
+        this.y = Math.random() * CANVAS_HEIGHT;
+        this.size = Math.random() * 60 + 20;
+        this.speed = Math.random() * 0.5 + 0.2;
+        this.frameX = Math.floor(Math.random() * 4);
+        this.frameY = Math.floor(Math.random() * 4);
+        this.frameSize = 250;
+        this.angle = 0;
+        this.spin = Math.random() > 0.5 ? 0.2 : -0.2;
+    }
+    update() {
+        this.y += this.speed;
+    }
+    draw(canvas) {
+        const ctx = canvas.getContext('2d');
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+const particlesArray = [];
+for (let i = 0; i < 20; i++) {
+    particlesArray.push(new Snowflake);
+}
+
+function handleSnowflakes(canvas) {
+    clear(canvas);
+    for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw(canvas);
+    }
+}
+
+function clear(canvas) {
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
