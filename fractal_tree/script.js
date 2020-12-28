@@ -15,7 +15,7 @@ function main() {
     snowBgCanvas = initializeCanvas('canvasSnowBackground');
     branchCanvas = initializeCanvas('canvasTreeBranches');
     const treeLocation = [CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.95];
-    drawBranches(branchCanvas, treeLocation, 80, 0, 10);
+    drawBranches(branchCanvas, treeLocation, 100, 0, 15);
 }
 
 function drawBranches(canvas, start, len, angle, branchWidth) {
@@ -31,8 +31,9 @@ function drawBranches(canvas, start, len, angle, branchWidth) {
     ctx.stroke();
 
     if (len > 10) {
-        drawBranches(canvas, [0, -len], len * 0.8, 35, branchWidth * 0.7)
-        drawBranches(canvas, [0, -len], len * 0.8, -35, branchWidth * 0.7)
+        drawBranches(canvas, [0, -len], len * 0.5, 35, branchWidth * 0.7)
+        drawBranches(canvas, [0, -len], len * 0.8, 0, branchWidth * 0.7)
+        drawBranches(canvas, [0, -len], len * 0.5, -35, branchWidth * 0.7)
     }
     ctx.restore();
 }
