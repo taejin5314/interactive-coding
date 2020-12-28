@@ -40,10 +40,17 @@ function drawLeaves(branchCanvas) {
 
     for (let i = 0; i < branchPixels.length; i++) {
         if (Math.random() < 0.3) {
+            let loc = branchPixels[i];
+            loc[0] += (Math.random() - 0.5) * 10;
+            loc[1] += (Math.random() - 0.5) * 10;
             ctx.beginPath();
             ctx.fillStyle = 'rgba(0, 255, 0, 1)';
-            ctx.arc(...branchPixels[i], 10, 0, Math.PI * 2);
+            ctx.save();
+            ctx.translate(...loc);
+            ctx.rotate(Math.random() * Math.PI * 2);
+            ctx.arc(0, 0, 5, 0, Math.PI);
             ctx.fill();
+            ctx.restore();
         }
     }
 }
