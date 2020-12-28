@@ -1,5 +1,6 @@
 const CANVAS_WIDTH = 480;
 const CANVAS_HEIGHT = 620;
+const particlesArray = [];
 
 let snowBgCanvas;
 let branchCanvas;
@@ -81,6 +82,7 @@ main();
 
 const snowflakes = new Image();
 snowflakes.src = 'snowflakes.png';
+
 class Snowflake {
     constructor() {
         this.x = Math.random() * CANVAS_WIDTH;
@@ -99,18 +101,20 @@ class Snowflake {
     draw(canvas) {
         const ctx = canvas.getContext('2d');
         ctx.beginPath();
+        ctx.fillStyle = 'white'
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
     }
 }
 
-const particlesArray = [];
 for (let i = 0; i < 20; i++) {
     particlesArray.push(new Snowflake);
 }
 
 function handleSnowflakes(canvas) {
     clear(canvas);
+
+
     for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update();
         particlesArray[i].draw(canvas);
