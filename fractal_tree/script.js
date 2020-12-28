@@ -12,7 +12,16 @@ function initializeCanvas(canvasID) {
 }
 
 function main() {
-    console.log('test');
     snowBgCanvas = initializeCanvas('canvasSnowBackground');
     branchCanvas = initializeCanvas('canvasTreeBranches')
+}
+
+function drawBranches(canvas, start, len, angle, branchWidth) {
+    const ctx = canvas.getContext('2d');
+    ctx.beginPath();
+    ctx.save();
+    ctx.lineWidth = branchWidth;
+    ctx.translate(0, 0);
+    ctx.rotate(angle * Math.PI / 180);
+    ctx.moveTo(0, 0);
 }
