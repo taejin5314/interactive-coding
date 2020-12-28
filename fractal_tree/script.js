@@ -18,7 +18,9 @@ function main() {
     const treeLocation = [CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.95];
     drawBranches(branchCanvas, treeLocation, 100, 0, 15);
     drawLeaves(branchCanvas);
-    handleSnowflakes(snowBgCanvas);
+    setInterval(function () {
+        handleSnowflakes(snowBgCanvas);
+    }, 1000 / 60);
 }
 
 function drawLeaves(branchCanvas) {
@@ -97,6 +99,7 @@ class Snowflake {
     }
     update() {
         this.y += this.speed;
+        if (this.y - this.size > CANVAS_HEIGHT) this.y = 0 - this.size;
     }
     draw(canvas) {
         const ctx = canvas.getContext('2d');
@@ -116,8 +119,8 @@ function handleSnowflakes(canvas) {
 
 
     for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
         particlesArray[i].draw(canvas);
+        particlesArray[i].update();
     }
 }
 
