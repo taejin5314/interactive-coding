@@ -21,6 +21,7 @@ function main() {
     drawBranches(branchCanvas, treeLocation, 100, 0, 15);
     drawLeaves(branchCanvas);
     setInterval(function () {
+        drawSnowBackground(snowBgCanvas)
         handleSnowflakes(snowBgCanvas);
     }, 1000 / 60);
 }
@@ -136,10 +137,17 @@ function clear(canvas) {
 function drawSnowBackground(canvas) {
     const ctx = canvas.getContext('2d');
     ctx.beginPath();
-    ctx.moveTo(0, CANVAS_WIDTH);
+    ctx.moveTo(0, CANVAS_HEIGHT);
     ctx.lineTo(0, CANVAS_WIDTH - 20);
     ctx.fillStyle = 'white'
     ctx.strokeStyle = 'lightblue';
-
-
+    ctx.quadraticCurveTo(CANVAS_WIDTH, CANVAS_WIDTH - 30, CANVAS_WIDTH, CANVAS_HEIGHT);
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(CANVAS_WIDTH, CANVAS_HEIGHT);
+    ctx.lineTo(CANVAS_WIDTH, CANVAS_WIDTH - 30);
+    ctx.quadraticCurveTo(0, CANVAS_WIDTH + 20, 0, CANVAS_HEIGHT);
+    ctx.stroke();
+    ctx.fill();
 }
