@@ -132,3 +132,14 @@ function clear(canvas) {
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
+
+function drawSnowBackground(canvas) {
+    const ctx = canvas.getContext('2d');
+    ctx.beginPath();
+    ctx.moveTo(0, CANVAS_WIDTH);
+    ctx.lineTo(0, CANVAS_WIDTH - 20);
+    ctx.fillStyle = 'white'
+    ctx.strokeStyle = 'lightblue';
+
+
+}
