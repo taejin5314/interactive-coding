@@ -95,7 +95,7 @@ class Snowflake {
         this.frameY = Math.floor(Math.random() * 4);
         this.frameSize = 250;
         this.angle = 0;
-        this.spin = Math.random() > 0.5 ? 1 : -1;
+        this.spin = Math.random() > 0.5 ? 0.5 : -0.5;
     }
     update() {
         this.y += this.speed;
