@@ -89,7 +89,7 @@ class Snowflake {
     constructor() {
         this.x = Math.random() * CANVAS_WIDTH;
         this.y = Math.random() * CANVAS_HEIGHT;
-        this.size = Math.random() * 60 + 20;
+        this.size = Math.random() * 60 + 40;
         this.speed = Math.random() * 0.5 + 0.2;
         this.frameX = Math.floor(Math.random() * 4);
         this.frameY = Math.floor(Math.random() * 4);
@@ -103,10 +103,7 @@ class Snowflake {
     }
     draw(canvas) {
         const ctx = canvas.getContext('2d');
-        ctx.beginPath();
-        ctx.fillStyle = 'white'
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.drawImage(snowflakes, this.frameX * this.frameSize, this.frameY * this.frameSize, this.frameSize, this.frameSize, this.x, this.y, this.size, this.size);
     }
 }
 
