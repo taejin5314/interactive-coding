@@ -95,15 +95,20 @@ class Snowflake {
         this.frameY = Math.floor(Math.random() * 4);
         this.frameSize = 250;
         this.angle = 0;
-        this.spin = Math.random() > 0.5 ? 0.2 : -0.2;
+        this.spin = Math.random() > 0.5 ? 1 : -1;
     }
     update() {
         this.y += this.speed;
         if (this.y - this.size > CANVAS_HEIGHT) this.y = 0 - this.size;
+        this.angle += this.spin;
     }
     draw(canvas) {
         const ctx = canvas.getContext('2d');
-        ctx.drawImage(snowflakes, this.frameX * this.frameSize, this.frameY * this.frameSize, this.frameSize, this.frameSize, this.x, this.y, this.size, this.size);
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle * Math.PI / 180);
+        ctx.drawImage(snowflakes, this.frameX * this.frameSize, this.frameY * this.frameSize, this.frameSize, this.frameSize, 0 - this.size / 2, 0 - this.size / 2, this.size, this.size);
+        ctx.restore();
     }
 }
 
