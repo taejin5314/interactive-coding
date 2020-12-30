@@ -5,6 +5,7 @@ const particlesArray = [];
 let snowBgCanvas;
 let branchCanvas;
 let snowFgCanvas;
+let gameCanvas;
 
 function initializeCanvas(canvasID) {
     const canvas = document.getElementById(canvasID);
@@ -17,6 +18,8 @@ function main() {
     snowBgCanvas = initializeCanvas('canvasSnowBackground');
     branchCanvas = initializeCanvas('canvasTreeBranches');
     snowFgCanvas = initializeCanvas('canvasSnowForeground');
+    gameCanvas = initializeCanvas('canvasGame');
+    gameCanvas.style.cursor = 'none';
     const treeLocation = [CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.95];
     drawBranches(branchCanvas, treeLocation, 100, 0, 15);
     drawLeaves(branchCanvas);
