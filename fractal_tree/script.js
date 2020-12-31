@@ -26,7 +26,7 @@ function main() {
     setInterval(function () {
         handleSnowflakes(snowBgCanvas);
         drawSnowBackground(snowBgCanvas)
-    }, 1000 / 60);
+    }, 1000 / 50);
     drawSnowForeground(snowFgCanvas)
 }
 
